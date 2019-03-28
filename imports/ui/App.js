@@ -4,6 +4,8 @@ var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
+import FloorPlan from "./floorPlan.js";
+
 var room_0 = [];
 var room_1 = [];
 var room_2 = [];
@@ -11,6 +13,13 @@ var room_3 = [];
 var room_4 = [];
 var room_5 = [];
 var room_6 = [];
+
+const graphStyle = {
+    width: "90%",
+    height: "350px",
+    padding: "30px",
+};
+
 class App extends Component {
     constructor(props){
         super(props);
@@ -80,10 +89,15 @@ class App extends Component {
         };
         return (
             <div>
-                <CanvasJSChart options = {options}
-                               onRef={ref => this.chart = ref}
-                />
-                {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+                <div style={graphStyle}>
+                    <CanvasJSChart options = {options}
+                                   onRef={ref => this.chart = ref}
+                    />
+                    {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+                </div>
+                <div>
+                    <FloorPlan />
+                </div>
             </div>
         );
     }
