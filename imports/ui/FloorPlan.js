@@ -1,32 +1,50 @@
 import React from 'react';
 
-const planStyle = {
-    width: "717px",
-    height: "539px",
-    paddingTop: "50px",
-    paddingLeft: "40px",
-    viewBox: "0 0 717 539",
-    version: "1.1",
-    xmlns: "http://www.w3.org/2000/svg",
-    style: "background: #FFFFFF;"
-};
-
 class FloorPlan extends React.Component {
 
+    constructor(props) {
+        super(props);
+        {/* By default, all room stats are visible*/}
+        this.state = {
+            lounge: true,
+            room1: true,
+            room2: true,
+            room3: true,
+            room4: true,
+            room5: true,
+            room6: true,
+        };
+    }
+
+    toggleRoom(e) {
+        alert("You clicked " + e);
+    }
+
     render() {
+        const planStyle = {
+            width: "717px",
+            height: "539px",
+            paddingTop: "50px",
+            paddingLeft: "40px",
+            viewBox: "0 0 717 539",
+            version: "1.1",
+            xmlns: "http://www.w3.org/2000/svg",
+            style: "background: #FFFFFF"
+        };
+
         return (
             <svg style={planStyle}>
                 <title>floor_plan</title>
                 <desc>Created with Sketch.</desc>
                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <rect id="Rectangle" stroke="#979797" stroke-width="2" x="1" y="1" width="714" height="537" fill="white"></rect>
-                    <rect id="Lounge" stroke="#979797" stroke-width="2" x="16" y="26" width="289" height="182" fill="blue"></rect>
-                    <rect id="Room-1" stroke="#979797" stroke-width="2" x="16" y="356" width="100" height="182" fill="red"></rect>
-                    <rect id="Room-2" stroke="#979797" stroke-width="2" x="133" y="356" width="100" height="182" fill="orange"></rect>
-                    <rect id="Room-3" stroke="#979797" stroke-width="2" x="250" y="356" width="100" height="182" fill="#f4df42"></rect>
-                    <rect id="Room-4" stroke="#979797" stroke-width="2" x="367" y="356" width="100" height="182" fill="#41c4f4"></rect>
-                    <rect id="Room-5" stroke="#979797" stroke-width="2" x="484" y="356" width="100" height="182" fill="blue"></rect>
-                    <rect id="Room-6" stroke="#979797" stroke-width="2" x="601" y="356" width="100" height="182"></rect>
+                    <rect id="Lounge" stroke="#979797" stroke-width="2" x="16" y="26" width="289" height="182" fill="blue" onClick={this.toggleRoom.bind(this, 0)}></rect>
+                    <rect id="Room-1" stroke="#979797" stroke-width="2" x="16" y="356" width="100" height="182" fill="red" onClick={this.toggleRoom.bind(this, 1)}></rect>
+                    <rect id="Room-2" stroke="#979797" stroke-width="2" x="133" y="356" width="100" height="182" fill="orange" onClick={this.toggleRoom.bind(this, 2)}></rect>
+                    <rect id="Room-3" stroke="#979797" stroke-width="2" x="250" y="356" width="100" height="182" fill="#f4df42" onClick={this.toggleRoom.bind(this, 3)}></rect>
+                    <rect id="Room-4" stroke="#979797" stroke-width="2" x="367" y="356" width="100" height="182" fill="#41c4f4" onClick={this.toggleRoom.bind(this, 4)}></rect>
+                    <rect id="Room-5" stroke="#979797" stroke-width="2" x="484" y="356" width="100" height="182" fill="blue" onClick={this.toggleRoom.bind(this, 5)}></rect>
+                    <rect id="Room-6" stroke="#979797" stroke-width="2" x="601" y="356" width="100" height="182" fill="white" onClick={this.toggleRoom.bind(this, 6)}></rect>
                     <text id="Room-0" font-family="Chalkboard" font-size="28" font-weight="normal" fill="#000000">
                         <tspan x="114.003315" y="189">Room 0</tspan>
                     </text>
