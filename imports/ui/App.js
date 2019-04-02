@@ -4,7 +4,7 @@ var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-import FloorPlan from "./floorPlan.js";
+import FloorPlan from "./FloorPlan";
 
 var room_0 = [];
 var room_1 = [];
