@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e1a934d-dbbe-4f11-93a9-896ef554b43c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/ui/FloorPlan.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/ui/FloorPlan.js" afterDir="false" />
-    </list>
+    <list default="true" id="0e1a934d-dbbe-4f11-93a9-896ef554b43c" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -28,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/imports/ui/FloorPlan.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1352">
-              <caret line="52" column="43" lean-forward="true" selection-start-line="52" selection-start-column="43" selection-end-line="52" selection-end-column="43" />
+            <state relative-caret-position="56">
+              <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -58,8 +55,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-336" />
-    <option name="y" value="81" />
+    <option name="y" value="23" />
     <option name="width" value="1364" />
     <option name="height" value="877" />
   </component>
@@ -149,15 +145,15 @@
       <workItem from="1554197930510" duration="3050000" />
       <workItem from="1554202747028" duration="2403000" />
       <workItem from="1554206160317" duration="2779000" />
-      <workItem from="1554212662263" duration="1775000" />
+      <workItem from="1554212662263" duration="2117000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15395000" />
+    <option name="totallyTimeSpent" value="15737000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-185" y="23" width="1364" height="877" extended-state="0" />
+    <frame x="0" y="23" width="1364" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13030529" />
@@ -235,8 +231,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/FloorPlan.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1352">
-          <caret line="52" column="43" lean-forward="true" selection-start-line="52" selection-start-column="43" selection-end-line="52" selection-end-column="43" />
+        <state relative-caret-position="56">
+          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
         </state>
       </provider>
     </entry>

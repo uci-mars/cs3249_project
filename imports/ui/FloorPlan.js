@@ -15,53 +15,25 @@ class FloorPlan extends React.Component {
         {/* By default, all room stats are visible*/}
         {/* TODO: change all initial room state to sync with average temperature. */}
         this.state = {
-            lounge: cold,
-            room1: cold,
-            room2: cool,
-            room3: mid,
-            room4: warm,
-            room5: hot,
-            room6: mid,
+        	rooms: [cold, cold, cool, mid, warm, hot, mid],
+        	visible: [true, true, true, true, true, true, true,]
         };
     }
 
+    colorRender(e) {
+    	if (this.state.visible[e] === false) {
+    		return invisible;
+    	} else {
+    		return this.state.rooms[e];
+    	}
+    }
+
     toggleRoom(e) {
-        //alert("You clicked " + e);
-        if (e === 0) {
-            (this.state.lounge === invisible)
-                ? this.setState({lounge: cold})
-                : this.setState({lounge: invisible});
-
-        } else if (e === 1) {
-            (this.state.room1 === invisible)
-                ? this.setState({room1: cold})
-                : this.setState({room1: invisible});
-
-        } else if (e === 2) {
-            (this.state.room2 === invisible)
-                ? this.setState({room2: cool})
-                : this.setState({room2: invisible});
-
-        } else if (e === 3) {
-            (this.state.room3 === invisible)
-                ? this.setState({room3: mid})
-                : this.setState({room3: invisible});
-
-        } else if (e === 4) {
-            (this.state.room4 === invisible)
-                ? this.setState({room4: warm})
-                : this.setState({room4: invisible});
-
-        } else if (e === 5) {
-            (this.state.room5 === invisible)
-                ? this.setState({room5: hot})
-                : this.setState({room5: invisible});
-
-        } else {
-            (this.state.room6 === invisible)
-                ? this.setState({room6: mid})
-                : this.setState({room6: invisible});
-        }
+        const visible = this.state.visible.slice();
+        visible[e] = this.state.visible[e] ? false : true;
+        this.setState({
+        	visible: visible,
+        });
     }
 
     render() {
@@ -82,13 +54,13 @@ class FloorPlan extends React.Component {
                 <desc>Created with Sketch.</desc>
                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <rect id="Rectangle" stroke="#979797" stroke-width="2" x="1" y="1" width="714" height="537" fill="white"></rect>
-                    <rect id="Lounge" stroke="#979797" stroke-width="2" x="16" y="26" width="289" height="182" fill= {this.state.lounge} onClick={this.toggleRoom.bind(this, 0)}></rect>
-                    <rect id="Room-1" stroke="#979797" stroke-width="2" x="16" y="356" width="100" height="182" fill= {this.state.room1} onClick={this.toggleRoom.bind(this, 1)}></rect>
-                    <rect id="Room-2" stroke="#979797" stroke-width="2" x="133" y="356" width="100" height="182" fill={this.state.room2} onClick={this.toggleRoom.bind(this, 2)}></rect>
-                    <rect id="Room-3" stroke="#979797" stroke-width="2" x="250" y="356" width="100" height="182" fill={this.state.room3} onClick={this.toggleRoom.bind(this, 3)}></rect>
-                    <rect id="Room-4" stroke="#979797" stroke-width="2" x="367" y="356" width="100" height="182" fill={this.state.room4} onClick={this.toggleRoom.bind(this, 4)}></rect>
-                    <rect id="Room-5" stroke="#979797" stroke-width="2" x="484" y="356" width="100" height="182" fill={this.state.room5} onClick={this.toggleRoom.bind(this, 5)}></rect>
-                    <rect id="Room-6" stroke="#979797" stroke-width="2" x="601" y="356" width="100" height="182" fill={this.state.room6} onClick={this.toggleRoom.bind(this, 6)}></rect>
+                    <rect id="Lounge" stroke="#979797" stroke-width="2" x="16" y="26" width="289" height="182" fill= {this.colorRender(0)} onClick={this.toggleRoom.bind(this, 0)}></rect>
+                    <rect id="Room-1" stroke="#979797" stroke-width="2" x="16" y="356" width="100" height="182" fill= {this.colorRender(1)} onClick={this.toggleRoom.bind(this, 1)}></rect>
+                    <rect id="Room-2" stroke="#979797" stroke-width="2" x="133" y="356" width="100" height="182" fill={this.colorRender(2)} onClick={this.toggleRoom.bind(this, 2)}></rect>
+                    <rect id="Room-3" stroke="#979797" stroke-width="2" x="250" y="356" width="100" height="182" fill={this.colorRender(3)} onClick={this.toggleRoom.bind(this, 3)}></rect>
+                    <rect id="Room-4" stroke="#979797" stroke-width="2" x="367" y="356" width="100" height="182" fill={this.colorRender(4)} onClick={this.toggleRoom.bind(this, 4)}></rect>
+                    <rect id="Room-5" stroke="#979797" stroke-width="2" x="484" y="356" width="100" height="182" fill={this.colorRender(5)} onClick={this.toggleRoom.bind(this, 5)}></rect>
+                    <rect id="Room-6" stroke="#979797" stroke-width="2" x="601" y="356" width="100" height="182" fill={this.colorRender(6)} onClick={this.toggleRoom.bind(this, 6)}></rect>
                     <text id="Room-0" font-family="Chalkboard" font-size="28" font-weight="normal" fill="#000000">
                         <tspan x="114.003315" y="189">Room 0</tspan>
                     </text>
