@@ -1,40 +1,26 @@
 import React from 'react';
 
 const invisible = "white";
-const cold = "blue";
-const cool = "#41c4f4";
-const mid = "#f4df42";
-const warm = "orange";
-const hot = "red";
+
 
 
 class FloorPlan extends React.Component {
 
     constructor(props) {
         super(props);
-        {/* By default, all room stats are visible*/}
         {/* TODO: change all initial room state to sync with average temperature. */}
-        this.state = {
-        	rooms: [cold, cold, cool, mid, warm, hot, mid],
-        	visible: [true, true, true, true, true, true, true,]
-        };
     }
 
     colorRender(e) {
-    	if (this.state.visible[e] === false) {
+    	{/* Used for passing argument to 'fill' property of room SVG component. */}
+    	if (this.props.visible[e] === false) {
     		return invisible;
     	} else {
-    		return this.state.rooms[e];
+    		return this.props.rooms[e];
     	}
     }
 
-    toggleRoom(e) {
-        const visible = this.state.visible.slice();
-        visible[e] = this.state.visible[e] ? false : true;
-        this.setState({
-        	visible: visible,
-        });
-    }
+   
 
     render() {
         const planStyle = {
@@ -54,13 +40,13 @@ class FloorPlan extends React.Component {
                 <desc>Created with Sketch.</desc>
                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <rect id="Rectangle" stroke="#979797" stroke-width="2" x="1" y="1" width="714" height="537" fill="white"></rect>
-                    <rect id="Lounge" stroke="#979797" stroke-width="2" x="16" y="26" width="289" height="182" fill= {this.colorRender(0)} onClick={this.toggleRoom.bind(this, 0)}></rect>
-                    <rect id="Room-1" stroke="#979797" stroke-width="2" x="16" y="356" width="100" height="182" fill= {this.colorRender(1)} onClick={this.toggleRoom.bind(this, 1)}></rect>
-                    <rect id="Room-2" stroke="#979797" stroke-width="2" x="133" y="356" width="100" height="182" fill={this.colorRender(2)} onClick={this.toggleRoom.bind(this, 2)}></rect>
-                    <rect id="Room-3" stroke="#979797" stroke-width="2" x="250" y="356" width="100" height="182" fill={this.colorRender(3)} onClick={this.toggleRoom.bind(this, 3)}></rect>
-                    <rect id="Room-4" stroke="#979797" stroke-width="2" x="367" y="356" width="100" height="182" fill={this.colorRender(4)} onClick={this.toggleRoom.bind(this, 4)}></rect>
-                    <rect id="Room-5" stroke="#979797" stroke-width="2" x="484" y="356" width="100" height="182" fill={this.colorRender(5)} onClick={this.toggleRoom.bind(this, 5)}></rect>
-                    <rect id="Room-6" stroke="#979797" stroke-width="2" x="601" y="356" width="100" height="182" fill={this.colorRender(6)} onClick={this.toggleRoom.bind(this, 6)}></rect>
+                    <rect id="Lounge" stroke="#979797" stroke-width="2" x="16" y="26" width="289" height="182" fill= {this.colorRender(0)} onClick={() => this.props.onClick(0)}></rect>
+                    <rect id="Room-1" stroke="#979797" stroke-width="2" x="16" y="356" width="100" height="182" fill= {this.colorRender(1)} onClick={() => this.props.onClick(1)}></rect>
+                    <rect id="Room-2" stroke="#979797" stroke-width="2" x="133" y="356" width="100" height="182" fill={this.colorRender(2)} onClick={() => this.props.onClick(2)}></rect>
+                    <rect id="Room-3" stroke="#979797" stroke-width="2" x="250" y="356" width="100" height="182" fill={this.colorRender(3)} onClick={() => this.props.onClick(3)}></rect>
+                    <rect id="Room-4" stroke="#979797" stroke-width="2" x="367" y="356" width="100" height="182" fill={this.colorRender(4)} onClick={() => this.props.onClick(4)}></rect>
+                    <rect id="Room-5" stroke="#979797" stroke-width="2" x="484" y="356" width="100" height="182" fill={this.colorRender(5)} onClick={() => this.props.onClick(5)}></rect>
+                    <rect id="Room-6" stroke="#979797" stroke-width="2" x="601" y="356" width="100" height="182" fill={this.colorRender(6)} onClick={() => this.props.onClick(6)}></rect>
                     <text id="Room-0" font-family="Chalkboard" font-size="28" font-weight="normal" fill="#000000">
                         <tspan x="114.003315" y="189">Room 0</tspan>
                     </text>

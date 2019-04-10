@@ -6,6 +6,12 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 import FloorPlan from "./FloorPlan";
 
+const cold = "blue";
+const cool = "#41c4f4";
+const mid = "#f4df42";
+const warm = "orange";
+const hot = "red";
+
 var room_0 = [];
 var room_1 = [];
 var room_2 = [];
@@ -23,6 +29,10 @@ const graphStyle = {
 class App extends Component {
     constructor(props){
         super(props);
+        {/* By default, all room stats are visible*/}
+        this.state = {
+            visible: [true, true, true, true, true, true, true],
+        };
 
         this.compare.bind(this);
         this.onClickCallback.bind(this);
@@ -30,6 +40,21 @@ class App extends Component {
 
     onClickCallback(e) {
         alert(  e.dataSeries.type + ", dataPoint { x:" + e.dataPoint.x + ", y: "+ e.dataPoint.y + " }" );
+    }
+
+    getRoomColor() {
+        {/* TODO: calculate and decide on color rendering of rooms */}
+        const values = [cold, cold, cool, mid, warm, hot, mid];
+        return values;
+    }
+
+    toggleRoom(e) {
+        {/* Onclick function used on rooms to toggle with their visibility. */}
+        const visible = this.state.visible.slice();
+        visible[e] = this.state.visible[e] ? false : true;
+        this.setState({
+            visible: visible,
+        });
     }
 
 
@@ -99,7 +124,11 @@ class App extends Component {
                     */}
                 </div>
                 <div>
-                    <FloorPlan />
+                    <FloorPlan 
+                      visible={this.state.visible}
+                      rooms={this.getRoomColor()}
+                      onClick={(i) => this.toggleRoom(i)}
+                     />
                 </div>
             </div>
         );
