@@ -29,9 +29,12 @@ const graphStyle = {
 class App extends Component {
     constructor(props){
         super(props);
-        {/* By default, all room stats are visible*/}
+        {/* By default, all room stats are visible */}
+        {/* visible state syncs between floor plan and graph */}
+    	{/* TODO: initialise avgs state by actual data */}
         this.state = {
             visible: [true, true, true, true, true, true, true],
+            avgs: [5, 10, 15, 20, 25, 30, 22],
         };
 
         this.compare.bind(this);
@@ -42,9 +45,34 @@ class App extends Component {
         alert(  e.dataSeries.type + ", dataPoint { x:" + e.dataPoint.x + ", y: "+ e.dataPoint.y + " }" );
     }
 
+    colorPicker(temp) {
+    	{/* Section the temperature to different color range. */}
+    	if (temp <= 10) {
+    		return cold;
+
+    	} else if (temp <= 18) {
+    		return cool;
+
+    	} else if (temp <= 22) {
+    		return mid;
+
+    	} else if (temp <= 26) {
+    		return warm;
+
+    	} else {
+    		return hot;
+    	}
+    }
+
     getRoomColor() {
-        {/* TODO: calculate and decide on color rendering of rooms */}
-        const values = [cold, cold, cool, mid, warm, hot, mid];
+    	{/* Map average temperatures to room colors. */}
+    	let values = new Array();
+    	const avgs = this.state.avgs.slice();
+
+    	for (var i = 0; i < avgs.length; i++) {
+    		values[i] = this.colorPicker(avgs[i]);
+    	}
+        
         return values;
     }
 
