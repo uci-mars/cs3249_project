@@ -172,4 +172,73 @@ class App extends Component {
 
     }
 
+    colorPicker(temp) {
+    	{/* Section the temperature to different color range. */}
+    	if (temp <= 10) {
+    		return cold;
+
+    	} else if (temp <= 18) {
+    		return cool;
+
+    	} else if (temp <= 22) {
+    		return mid;
+
+    	} else if (temp <= 26) {
+    		return warm;
+
+    	} else {
+    		return hot;
+    	}
+    }
+
+    getRoomColor() {
+    	{/* Map average temperatures to room colors. */}
+    	let values = new Array();
+    	const avgs = this.state.avgs.slice();
+
+    	for (var i = 0; i < avgs.length; i++) {
+    		values[i] = this.colorPicker(avgs[i]);
+    	}
+
+        return values;
+    }
+
+    toggleRoom(e) {
+        {/* Onclick function used on rooms to toggle with their visibility. */}
+        const visible = this.state.visible.slice();
+        visible[e] = this.state.visible[e] ? false : true;
+        this.setState({
+            visible: visible,
+        });
+    }
+
+
+    render() {
+        return (
+            <div className="dashboard">
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <ToolPanel/>
+                </MuiPickersUtilsProvider>
+                <LineGraph/>
+            <div>
+                <div style={graphStyle}>
+                    <CanvasJSChart options = {options}
+                                   onRef={ref => this.chart = ref}
+                    />
+                    {/*
+                      You can get reference to the chart instance as shown above using onRef.
+                      This allows you to access all chart properties and methods
+                    */}
+                </div>
+                <div>
+                    <FloorPlan
+                      visible={this.state.visible}
+                      rooms={this.getRoomColor()}
+                      onClick={(i) => this.toggleRoom(i)}
+                     />
+                </div>
+            </div>
+        );
+    }
+
 export default App;
