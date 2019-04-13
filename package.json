@@ -8,10 +8,19 @@
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@babel/runtime": "^7.1.5",
+    "@date-io/date-fns": "^1.1.0",
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/lab": "^3.0.0-alpha.30",
+    "date-fns": "^2.0.0-alpha.27",
+    "material-ui-pickers": "^2.2.4",
+=======
+    "@babel/runtime": "^7.4.2",
+>>>>>>> 26e6b308a26ecef1e4430144c997860c11ec0efa
     "meteor-node-stubs": "^0.4.1",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "meteor": {
     "mainModule": {
