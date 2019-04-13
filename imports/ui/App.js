@@ -4,16 +4,6 @@ import LineGraph from "./LineGraph"
 import ToolPanel from "./ToolPanel"
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import DateFnsUtils from '@date-io/date-fns';
-
-
-import FloorPlan from "./FloorPlan";
-
-const cold = "blue";
-const cool = "#41c4f4";
-const mid = "#f4df42";
-const warm = "orange";
-const hot = "red";
-
 import FloorPlan from "./FloorPlan";
 
 const cold = "blue";
@@ -37,11 +27,14 @@ const graphStyle = {
 };
 
 class App extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        {/* By default, all room stats are visible */}
-        {/* visible state syncs between floor plan and graph */}
-    	{/* TODO: initialise avgs state by actual data */}
+        {/* By default, all room stats are visible */
+        }
+        {/* visible state syncs between floor plan and graph */
+        }
+        {/* TODO: initialise avgs state by actual data */
+        }
         this.state = {
             visible: [true, true, true, true, true, true, true],
             avgs: [5, 10, 15, 20, 25, 30, 22],
@@ -49,24 +42,7 @@ class App extends Component {
 
         this.compare.bind(this);
         this.onClickCallback.bind(this);
-    }
-
-const graphStyle = {
-    width: "90%",
-    height: "350px",
-    padding: "30px",
-};
-
-class App extends Component {
-    constructor(props) {
-        super(props);
-        {/* By default, all room stats are visible */}
-        {/* visible state syncs between floor plan and graph */}
-    	{/* TODO: initialise avgs state by actual data */}
-        this.state = {
-            visible: [true, true, true, true, true, true, true],
-            avgs: [5, 10, 15, 20, 25, 30, 22],
-        };
+    };
 
     colorPicker(temp) {
     	{/* Section the temperature to different color range. */}
@@ -85,7 +61,7 @@ class App extends Component {
     	} else {
     		return hot;
     	}
-    }
+    };
 
     getRoomColor() {
     	{/* Map average temperatures to room colors. */}
