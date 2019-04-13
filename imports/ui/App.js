@@ -1,9 +1,10 @@
 var React = require('react');
 var Component = React.Component;
-import LineGraph from "./LineGraph"
-import ToolPanel from "./ToolPanel"
-import { MuiPickersUtilsProvider } from 'material-ui-pickers';
-import DateFnsUtils from '@date-io/date-fns';
+var CanvasJSReact = require('./canvasjs.react');
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+var DATA = require('./localData/data.json');
+
 import FloorPlan from "./FloorPlan";
 
 const cold = "blue";
@@ -27,14 +28,11 @@ const graphStyle = {
 };
 
 class App extends Component {
-    constructor(props) {
+    constructor(props){
         super(props);
-        {/* By default, all room stats are visible */
-        }
-        {/* visible state syncs between floor plan and graph */
-        }
-        {/* TODO: initialise avgs state by actual data */
-        }
+        {/* By default, all room stats are visible */}
+        {/* visible state syncs between floor plan and graph */}
+        {/* TODO: initialise avgs state by actual data */}
         this.state = {
             visible: [true, true, true, true, true, true, true],
             avgs: [5, 10, 15, 20, 25, 30, 22],
@@ -42,35 +40,39 @@ class App extends Component {
 
         this.compare.bind(this);
         this.onClickCallback.bind(this);
-    };
+    }
+
+    onClickCallback(e) {
+        alert(  e.dataSeries.type + ", dataPoint { x:" + e.dataPoint.x + ", y: "+ e.dataPoint.y + " }" );
+    }
 
     colorPicker(temp) {
-    	{/* Section the temperature to different color range. */}
-    	if (temp <= 10) {
-    		return cold;
+        {/* Section the temperature to different color range. */}
+        if (temp <= 10) {
+            return cold;
 
-    	} else if (temp <= 18) {
-    		return cool;
+        } else if (temp <= 18) {
+            return cool;
 
-    	} else if (temp <= 22) {
-    		return mid;
+        } else if (temp <= 22) {
+            return mid;
 
-    	} else if (temp <= 26) {
-    		return warm;
+        } else if (temp <= 26) {
+            return warm;
 
-    	} else {
-    		return hot;
-    	}
-    };
+        } else {
+            return hot;
+        }
+    }
 
     getRoomColor() {
-    	{/* Map average temperatures to room colors. */}
-    	let values = new Array();
-    	const avgs = this.state.avgs.slice();
+        {/* Map average temperatures to room colors. */}
+        let values = new Array();
+        const avgs = this.state.avgs.slice();
 
-    	for (var i = 0; i < avgs.length; i++) {
-    		values[i] = this.colorPicker(avgs[i]);
-    	}
+        for (var i = 0; i < avgs.length; i++) {
+            values[i] = this.colorPicker(avgs[i]);
+        }
 
         return values;
     }
@@ -152,10 +154,10 @@ class App extends Component {
                 </div>
                 <div>
                     <FloorPlan
-                      visible={this.state.visible}
-                      rooms={this.getRoomColor()}
-                      onClick={(i) => this.toggleRoom(i)}
-                     />
+                        visible={this.state.visible}
+                        rooms={this.getRoomColor()}
+                        onClick={(i) => this.toggleRoom(i)}
+                    />
                 </div>
             </div>
         );
@@ -169,76 +171,80 @@ class App extends Component {
         return 0;
     }
 
+    componentDidMount(){
+        var chart = this.chart;
+
+
+        for (var i = 0; i < DATA.length; i++) {
+            if ("0" in DATA[i].temperature) {
+                room_0.push({
+                    x: new Date(DATA[i].timestamp),
+                    y: DATA[i].temperature['0'],
+                    roomID: 0,
+                });
+            };
+
+            if ("1" in DATA[i].temperature) {
+                room_1.push({
+                    x: new Date(DATA[i].timestamp),
+                    y: DATA[i].temperature['1'],
+                    roomID: 1,
+                });
+            };
+
+            if ("2" in DATA[i].temperature) {
+                room_2.push({
+                    x: new Date(DATA[i].timestamp),
+                    y: DATA[i].temperature['2'],
+                    roomID: 2,
+                });
+            };
+
+            if ("3" in DATA[i].temperature) {
+                room_3.push({
+                    x: new Date(DATA[i].timestamp),
+                    y: DATA[i].temperature['3'],
+                    roomID: 3,
+                });
+            };
+
+            if ("4" in DATA[i].temperature) {
+                room_4.push({
+                    x: new Date(DATA[i].timestamp),
+                    y: DATA[i].temperature['4'],
+                    roomID: 4,
+                });
+            };
+
+            if ("5" in DATA[i].temperature) {
+                room_5.push({
+                    x: new Date(DATA[i].timestamp),
+                    y: DATA[i].temperature['5'],
+                    roomID: 5,
+                });
+            };
+
+            if ("6" in DATA[i].temperature) {
+                room_5.push({
+                    x: new Date(DATA[i].timestamp),
+                    y: DATA[i].temperature['6'],
+                    roomID: 6,
+                });
+            };
+        };
+
+        room_0.sort(this.compare);
+        room_1.sort(this.compare);
+        room_2.sort(this.compare);
+        room_3.sort(this.compare);
+        room_4.sort(this.compare);
+        room_5.sort(this.compare);
+        room_6.sort(this.compare);
+
+        chart.render();
 
     }
 
-    colorPicker(temp) {
-    	{/* Section the temperature to different color range. */}
-    	if (temp <= 10) {
-    		return cold;
-
-    	} else if (temp <= 18) {
-    		return cool;
-
-    	} else if (temp <= 22) {
-    		return mid;
-
-    	} else if (temp <= 26) {
-    		return warm;
-
-    	} else {
-    		return hot;
-    	}
-    }
-
-    getRoomColor() {
-    	{/* Map average temperatures to room colors. */}
-    	let values = new Array();
-    	const avgs = this.state.avgs.slice();
-
-    	for (var i = 0; i < avgs.length; i++) {
-    		values[i] = this.colorPicker(avgs[i]);
-    	}
-
-        return values;
-    }
-
-    toggleRoom(e) {
-        {/* Onclick function used on rooms to toggle with their visibility. */}
-        const visible = this.state.visible.slice();
-        visible[e] = this.state.visible[e] ? false : true;
-        this.setState({
-            visible: visible,
-        });
-    }
-
-
-    render() {
-        return (
-            <div className="dashboard">
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <ToolPanel/>
-                </MuiPickersUtilsProvider>
-                <LineGraph/>
-            <div>
-                <div style={graphStyle}>
-                    <CanvasJSChart options = {options}
-                                   onRef={ref => this.chart = ref}
-                    />
-                    {/*
-                      You can get reference to the chart instance as shown above using onRef.
-                      This allows you to access all chart properties and methods
-                    */}
-                </div>
-                <div>
-                    <FloorPlan
-                      visible={this.state.visible}
-                      rooms={this.getRoomColor()}
-                      onClick={(i) => this.toggleRoom(i)}
-                     />
-                </div>
-            </div>
-        );
-    }
+}
 
 export default App;
