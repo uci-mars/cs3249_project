@@ -1,4 +1,3 @@
-
 var React = require('react');
 export var CanvasJS = require('./canvasjs.min');
 CanvasJS = CanvasJS.Chart ? CanvasJS : window.CanvasJS;
@@ -41,7 +40,7 @@ export class CanvasJSChart extends React.Component {
 	}	
 }
 
-var CanvasJSReact = {
+export var CanvasJSReact = {
     CanvasJSChart: CanvasJSChart,
     CanvasJS: CanvasJS
 };
