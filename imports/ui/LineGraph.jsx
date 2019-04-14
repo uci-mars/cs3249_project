@@ -26,8 +26,34 @@ class LineGraph extends Component {
         alert(  e.dataSeries.type + ", dataPoint { x:" + e.dataPoint.x + ", y: "+ e.dataPoint.y + " }" );
     }
 
+    convertDate(dateRaw) {
+        const formatDate = new Date(dateRaw);
+
+        return formatDate;
+    }
+
+    getStartDate() {
+        const dateRaw = this.props.dates.slice();
+        const start = dateRaw[0];
+        const value = this.convertDate(start);
+
+        return value;
+
+    }
+
+    getEndDate() {
+        const dateRaw = this.props.dates.slice();
+        const end = dateRaw[1];
+        const value = this.convertDate(end);
+
+        return value;
+    }
+
 
     render() {
+        const start = this.getStartDate();
+        const end = this.getEndDate();
+
         const options = {
             theme: "light2",
             rangeChanged: function (e) {console.log(new Date(e.axisX[0].viewportMinimum) + " , " + new Date(e.axisX[0].viewportMaximum))},
@@ -37,6 +63,10 @@ class LineGraph extends Component {
             },
             toolTip:{
                 content:"RoomID: {roomID}, Timestamp: {x}, Temperature: {y}°C" ,
+            },
+            axisX: {
+                viewportMinimum: start,
+                viewportMaximum: end,
             },
             axisY: {
                 title: "Temperature",

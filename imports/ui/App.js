@@ -38,14 +38,16 @@ class App extends Component {
         super(props);
         {/* By default, all room stats are visible */}
         {/* visible state syncs between floor plan and graph */}
-        {/* TODO: initialise avgs state by actual data */}
         this.state = {
             visible: [true, true, true, true, true, true, true],
             avgs: [5, 10, 15, 20, 25, 30, 22],
             dates: ["2013-10-02T05:15:00", "2013-12-03T15:30:00"],
             sampleNumber: [5995],
         };
+    }
 
+    updateAverage() {
+        {/* TODO: initialise avgs state by each room data */}
     }
 
 
