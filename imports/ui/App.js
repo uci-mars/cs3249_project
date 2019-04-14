@@ -37,17 +37,55 @@ class App extends Component {
     constructor(props){
         super(props);
         {/* By default, all room stats are visible */}
-        {/* visible state syncs between floor plan and graph */}
+        {/* default average temperatures are calculated from all data points of each room */}
+        {/* default date range is from earliest to the latest data point */}
+        {/* default sample number is the total number of data points provided */}
         this.state = {
             visible: [true, true, true, true, true, true, true],
             avgs: [5, 10, 15, 20, 25, 30, 22],
             dates: ["2013-10-02T05:15:00", "2013-12-03T15:30:00"],
-            sampleNumber: [5995],
+            sampleNumber: 5995,
         };
+
+        this.updateAverage = this.updateAverage.bind(this);
+        this.updateDates = this.updateDates.bind(this);
+        this.updateSampleNumber = this.updateSampleNumber.bind(this);
     }
 
-    updateAverage() {
+    toggleRoom(e) {
+        {/* Onclick function used on rooms to toggle with their visibility. */}
+        e.preventDefault();
+
+        const visible = this.state.visible.slice();
+        visible[e] = this.state.visible[e] ? false : true;
+        this.setState({
+            visible: visible,
+        });
+    }
+
+    updateAverage(temps) {
+        {/* INPUT: an array of temperatures of each room */}
         {/* TODO: initialise avgs state by each room data */}
+
+        this.setState({
+            avgs: temps
+        });
+    }
+
+    updateDates(newDates) {
+        {/* INPUT: an array of two elements. newDates[0] is start date; newDates[1] is end date */}
+
+        this.setState({
+            dates: newDates
+        });
+    }
+
+    updateSampleNumber(num) {
+        {/* INPUT: an number that represents sample number */}
+
+        this.setState({
+            sampleNumber: num
+        });
     }
 
 
@@ -82,15 +120,6 @@ class App extends Component {
         return values;
     }
 
-    toggleRoom(e) {
-        {/* Onclick function used on rooms to toggle with their visibility. */}
-        const visible = this.state.visible.slice();
-        visible[e] = this.state.visible[e] ? false : true;
-        this.setState({
-            visible: visible,
-        });
-    }
-
 
     render() {
         return (
@@ -98,16 +127,18 @@ class App extends Component {
                 <Tools
                     dates={this.state.dates}
                     sampleNumber={this.state.sampleNumber}
+                    updateDates={this.updateDates}
+                    updateSampleNumber={this.updateSampleNumber}
                 />
 
                 <div style={graphStyle}>
                     <LineGraph
                         dates={this.state.dates}
                         sampleNumber={this.state.sampleNumber}
+                        updateDates={this.updateDates}
+                        updateSampleNumber={this.updateSampleNumber}
                     />
                 </div>
-
-
 
                 <div>
                     <FloorPlan
