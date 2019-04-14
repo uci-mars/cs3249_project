@@ -5,7 +5,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 import LineGraph from "./LineGraph"
-import ToolPanel from "./ToolPanel"
+import Tools from "./Tools"
 import Grid from "@material-ui/core/Grid";
 import FloorPlan from "./FloorPlan";
 
