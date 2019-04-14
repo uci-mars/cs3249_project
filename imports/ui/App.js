@@ -38,6 +38,8 @@ class App extends Component {
         this.state = {
             visible: [true, true, true, true, true, true, true],
             avgs: [5, 10, 15, 20, 25, 30, 22],
+            dates: ["2013-10-02T05:15:00", "2013-12-03T15:30:00"],
+            sampleNumber: [5995],
         };
 
     }
@@ -90,7 +92,10 @@ class App extends Component {
                 <Tools/>
 
                 <div style={graphStyle}>
-                    <LineGraph/>
+                    <LineGraph
+                        dates={this.state.dates}
+                        sampleNumber={this.state.sampleNumber}
+                    />
                 </div>
 
 
