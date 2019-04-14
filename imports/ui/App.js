@@ -89,7 +89,10 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Tools/>
+                <Tools
+                    dates={this.state.dates}
+                    sampleNumber={this.state.sampleNumber}
+                />
 
                 <div style={graphStyle}>
                     <LineGraph
