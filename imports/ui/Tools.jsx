@@ -15,7 +15,7 @@ class Tools extends Component {
                         shrink: true,
                     }}
                 />
-            </form>
+            
 
 
         );
