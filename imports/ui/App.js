@@ -4,9 +4,12 @@ var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
+import { temperature_data } from '../api/temperature_data.js';
+import { withTracker } from 'meteor/react-meteor-data';
+
+
 import LineGraph from "./LineGraph"
 import Tools from "./Tools"
-import Grid from "@material-ui/core/Grid";
 import FloorPlan from "./FloorPlan";
 
 const cold = "blue";
@@ -22,6 +25,7 @@ var room_3 = [];
 var room_4 = [];
 var room_5 = [];
 var room_6 = [];
+
 
 const graphStyle = {
     width: "90%",
@@ -109,4 +113,8 @@ class App extends Component {
 
 }
 
-export default App;
+export default withTracker(() => {
+    return {
+        temperature_data: temperature_data.find({}).fetch(),
+    };
+})(App);
