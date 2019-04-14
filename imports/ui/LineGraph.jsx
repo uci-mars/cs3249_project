@@ -4,7 +4,7 @@ var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var DATA = require("./localData/data.json");
-import Paper from '@material-ui/core/Paper';
+
 
 var room_0 = [];
 var room_1 = [];

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/lab/Slider';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { InlineDateTimePicker } from "material-ui-pickers";
 
