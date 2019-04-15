@@ -57,7 +57,10 @@ class LineGraph extends Component {
 
         const options = {
             theme: "light2",
-            rangeChanged: function (e) {console.log(new Date(e.axisX[0].viewportMinimum) + " , " + new Date(e.axisX[0].viewportMaximum))},
+            rangeChanged: function (e) {
+                console.log(e.axisX[0].viewportMinimum + ", " + e.axisX[0].viewportMaximum);
+                console.log(new Date(e.axisX[0].viewportMinimum) + " , " + new Date(e.axisX[0].viewportMaximum));
+            },
             zoomEnabled:true,
             title: {
                 text: "Temperature Sensor in Tembusu College"

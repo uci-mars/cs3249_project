@@ -3,15 +3,20 @@ import TextField from '@material-ui/core/TextField';
 import Slider from '@material-ui/lab/Slider';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 
 const toolStyle = {
     padding: "0px 0px 0px 30px",
     display: "inline-flex"
 }
 
+const typoStyle = {
+    padding: "10px"
+};
+
 const sliderStyles = {
     width: 300,
-    padding: "40px 0px 0px 270px",
+    padding: "15px 0px 0px 270px",
     align: "right"
 };
 
@@ -22,13 +27,17 @@ class Tools extends Component {
         value: 3,
     };
 
-    handleChangeInDate() {
-        this.props.updateDates(event.target.value);
+    handleChangeInStartDate = name => event => {
+        this.props.updateDates([event.target.value, this.props.dates[1]]);
+    };
+
+    handleChangeInEndDate = name => event => {
+        this.props.updateDates([this.props.dates[0], event.target.value]);
     };
 
     handleChange = (event, value) => {
-    this.setState({ value });
-  };
+        this.setState({ value });
+    };
 
 
     render(){
@@ -43,7 +52,7 @@ class Tools extends Component {
                         label="Start Date"
                         type="date"
                         defaultValue={this.props.dates[0]}
-                        
+                        onChange={this.handleChangeInStartDate('name')}
                         InputLabelProps={{
                             shrink: true,
                         }}
@@ -56,7 +65,7 @@ class Tools extends Component {
                         label="End Date"
                         type="date"
                         defaultValue={this.props.dates[1]}
-                        
+                        onChange={this.handleChangeInEndDate('name')}
                         InputLabelProps={{
                             shrink: true,
                         }}
@@ -65,6 +74,7 @@ class Tools extends Component {
                     />
                 </form>
                 <div style={sliderStyles}>
+                    <Typography style={typoStyle}>No. of samples</Typography>
                     <Slider
                       value={value}
                       min={0}
