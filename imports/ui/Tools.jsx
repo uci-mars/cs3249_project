@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Slider from '@material-ui/lab/Slider';
-import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 
 const toolStyle = {
@@ -39,6 +37,10 @@ class Tools extends Component {
         this.setState({ value });
     };
 
+    formatDate(date){
+        return date.toISOString();
+    }
+
 
     render(){
 
@@ -50,7 +52,7 @@ class Tools extends Component {
                     <TextField
                         id="start"
                         label="Start Date"
-                        type="date"
+                        type="datetime-local"
                         defaultValue={this.props.dates[0]}
                         onChange={this.handleChangeInStartDate('name')}
                         InputLabelProps={{
@@ -63,7 +65,7 @@ class Tools extends Component {
                     <TextField
                         id="end"
                         label="End Date"
-                        type="date"
+                        type="datetime-local"
                         defaultValue={this.props.dates[1]}
                         onChange={this.handleChangeInEndDate('name')}
                         InputLabelProps={{

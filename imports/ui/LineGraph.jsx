@@ -146,6 +146,7 @@ class LineGraph extends Component {
 
     componentDidMount(){
         var chart = this.chart;
+        console.log(this.props.data);
 
         for (var i = 0; i < DATA.length; i++) {
             if ("0" in DATA[i].temperature) {

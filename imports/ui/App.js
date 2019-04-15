@@ -52,6 +52,10 @@ class App extends Component {
         this.updateSampleNumber = this.updateSampleNumber.bind(this);
     }
 
+    filterData(){
+
+    }
+
     toggleRoom(e) {
         {/* Onclick function used on rooms to toggle with their visibility. */}
         
