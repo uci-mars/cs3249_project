@@ -4,7 +4,7 @@ var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var DATA = require("./localData/data.json");
-
+var LTTB = require("downsample").LTTB;
 
 var room_0 = [];
 var room_1 = [];
@@ -47,6 +47,15 @@ class LineGraph extends Component {
         const value = this.convertDate(end);
 
         return value;
+    }
+
+    downSample(dataArray) {
+        const numPointsInDownsampledData: number = this.props.sampleNumber;
+        console.log(numPointsInDownsampledData);
+        const data: DataPoint[] = dataArray;
+        const downsampledDataLTTB: DataPoint[] = LTTB(data, numPointsInDownsampledData);
+        console.log(downsampledDataLTTB);
+        return downsampledDataLTTB;
     }
 
 
@@ -213,6 +222,15 @@ class LineGraph extends Component {
         room_4.sort(this.compare);
         room_5.sort(this.compare);
         room_6.sort(this.compare);
+
+        room_0 = this.downSample(room_0);
+        console.log(room_0);
+        room_1 = this.downSample(room_1);
+        room_2 = this.downSample(room_2);
+        room_3 = this.downSample(room_3);
+        room_4 = this.downSample(room_4);
+        room_5 = this.downSample(room_5);
+        room_6 = this.downSample(room_6);
 
         chart.render();
 

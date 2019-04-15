@@ -44,7 +44,7 @@ class App extends Component {
             visible: [true, true, true, true, true, true, true],
             avgs: [5, 10, 15, 20, 25, 30, 22],
             dates: ["2013-10-02T05:15:00", "2013-12-03T15:30:00"],
-            sampleNumber: 5995,
+            sampleNumber: 1000,
         };
 
         this.updateAverage = this.updateAverage.bind(this);
