@@ -22,7 +22,7 @@ const sliderStyles = {
 class Tools extends Component {
 
     state = {
-        value: 3,
+        value: this.props.sampleNumber,
     };
 
     handleChangeInStartDate = name => event => {
@@ -33,8 +33,9 @@ class Tools extends Component {
         this.props.updateDates([this.props.dates[0], event.target.value]);
     };
 
-    handleChange = (event, value) => {
+    handleChangeSlider = (event, value) => {
         this.setState({ value });
+        this.props.updateSampleNumber(this.state.value);
     };
 
     formatDate(date){
@@ -79,10 +80,10 @@ class Tools extends Component {
                     <Typography style={typoStyle}>No. of samples</Typography>
                     <Slider
                       value={value}
-                      min={0}
-                      max={6}
-                      step={1}
-                      onChange={this.handleChange}
+                      min={100}
+                      max={5995}
+                      step={100}
+                      onChange={this.handleChangeSlider}
                     />
                 </div>   
             </div>     
