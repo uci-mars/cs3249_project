@@ -26,27 +26,18 @@ class LineGraph extends Component {
         alert(  e.dataSeries.type + ", dataPoint { x:" + e.dataPoint.x + ", y: "+ e.dataPoint.y + " }" );
     }
 
+    handleChangeInStartDate = name => event => {
+        this.props.updateDates([event.target.value, this.props.dates[1]]);
+    };
+
+    handleChangeInEndDate = name => event => {
+        this.props.updateDates([this.props.dates[0], event.target.value]);
+    };
+
     convertDate(dateRaw) {
         const formatDate = new Date(dateRaw);
 
         return formatDate;
-    }
-
-    getStartDate() {
-        const dateRaw = this.props.dates.slice();
-        const start = dateRaw[0];
-        const value = this.convertDate(start);
-
-        return value;
-
-    }
-
-    getEndDate() {
-        const dateRaw = this.props.dates.slice();
-        const end = dateRaw[1];
-        const value = this.convertDate(end);
-
-        return value;
     }
 
     downSample(dataArray) {
@@ -60,15 +51,15 @@ class LineGraph extends Component {
 
 
     render() {
-        const start = this.getStartDate();
-        const end = this.getEndDate();
         const visibility = this.props.visible.slice();
+        const changeStart = this.handleChangeInStartDate;
+        const changeEnd = this.handleChangeInEndDate;
 
         const options = {
             theme: "light2",
             rangeChanged: function (e) {
-                console.log(e.axisX[0].viewportMinimum + ", " + e.axisX[0].viewportMaximum);
-                console.log(new Date(e.axisX[0].viewportMinimum) + " , " + new Date(e.axisX[0].viewportMaximum));
+                changeStart(new Date(e.axisX[0].viewportMinimum));
+                changeEnd(new Date(e.axisX[0].viewportMaximum));
             },
             zoomEnabled:true,
             title: {
@@ -78,8 +69,8 @@ class LineGraph extends Component {
                 content:"RoomID: {roomID}, Timestamp: {x}, Temperature: {y}°C" ,
             },
             axisX: {
-                viewportMinimum: start,
-                viewportMaximum: end,
+                viewportMinimum: this.props.dates[0],
+                viewportMaximum: this.props.dates[1],
             },
             axisY: {
                 title: "Temperature",
@@ -155,7 +146,6 @@ class LineGraph extends Component {
 
     componentDidMount(){
         var chart = this.chart;
-        console.log(this.props.data);
 
         for (var i = 0; i < DATA.length; i++) {
             if ("0" in DATA[i].temperature) {

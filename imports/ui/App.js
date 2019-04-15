@@ -1,3 +1,5 @@
+import {MuiPickersUtilsProvider} from "material-ui-pickers";
+
 var React = require('react');
 var Component = React.Component;
 var CanvasJSReact = require('./canvasjs.react');
@@ -11,6 +13,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import LineGraph from "./LineGraph"
 import Tools from "./Tools"
 import FloorPlan from "./FloorPlan";
+import DateFnsUtils from "@date-io/date-fns";
 
 const cold = "blue";
 const cool = "#41c4f4";
@@ -43,8 +46,8 @@ class App extends Component {
         this.state = {
             visible: [true, true, true, true, true, true, true],
             avgs: [5, 10, 15, 20, 25, 30, 22],
-            dates: ["2013-10-02T05:15:00", "2013-12-03T15:30:00"],
-            sampleNumber: 1000,
+            dates: [new Date("2013-10-02T05:15:00"), new Date("2013-12-03T15:30:00")],
+            sampleNumber: 5995,
         };
 
         this.updateAverage = this.updateAverage.bind(this);
@@ -52,13 +55,10 @@ class App extends Component {
         this.updateSampleNumber = this.updateSampleNumber.bind(this);
     }
 
-    filterData(){
-
-    }
 
     toggleRoom(e) {
         {/* Onclick function used on rooms to toggle with their visibility. */}
-        
+
 
         const visible = this.state.visible.slice();
         visible[e] = this.state.visible[e] ? false : true;
@@ -127,17 +127,21 @@ class App extends Component {
 
     render() {
         return (
+
             <div>
-                <Tools
-                    dates={this.state.dates}
-                    sampleNumber={this.state.sampleNumber}
-                    updateDates={this.updateDates}
-                    updateSampleNumber={this.updateSampleNumber}
-                />
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Tools
+                        dates={this.state.dates}
+                        sampleNumber={this.state.sampleNumber}
+                        updateDates={this.updateDates}
+                        updateSampleNumber={this.updateSampleNumber}
+                    />
+                </MuiPickersUtilsProvider>
 
                 <div style={graphStyle}>
                     <LineGraph
                         visible={this.state.visible}
+                        data={this.props.temperature_data}
                         dates={this.state.dates}
                         sampleNumber={this.state.sampleNumber}
                         updateDates={this.updateDates}
@@ -160,6 +164,8 @@ class App extends Component {
 }
 
 export default withTracker(() => {
+    Meteor.subscribe('temperature_data');
+
     return {
         temperature_data: temperature_data.find({}).fetch(),
     };
