@@ -7,17 +7,25 @@ class Tools extends Component {
         return(
             <form noValidate autoComplete="on">
                 <TextField
-                    id="date"
-                    label="Birthday"
+                    id="start"
+                    label="Start Date"
                     type="date"
-                    defaultValue="2017-05-24"
+                    defaultValue={this.props.dates[0]}
                     InputLabelProps={{
                         shrink: true,
                     }}
                 />
-            
 
-
+                <TextField
+                    id="end"
+                    label="End Date"
+                    type="date"
+                    defaultValue={this.props.dates[1]}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                />
+            </form>
         );
 
     }

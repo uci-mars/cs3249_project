@@ -53,6 +53,7 @@ class LineGraph extends Component {
     render() {
         const start = this.getStartDate();
         const end = this.getEndDate();
+        const visibility = this.props.visible.slice();
 
         const options = {
             theme: "light2",
@@ -74,36 +75,43 @@ class LineGraph extends Component {
                 includeZero: false
             },
             data: [{
+            	visible: visibility[0],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
                 dataPoints: room_0
             }, {
+            	visible: visibility[1],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
                 dataPoints: room_1
             }, {
+            	visible: visibility[2],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
                 dataPoints: room_2
             }, {
+            	visible: visibility[3],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
                 dataPoints: room_3
             }, {
+            	visible: visibility[4],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
                 dataPoints: room_4
             }, {
+            	visible: visibility[5],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
                 dataPoints: room_5
             }, {
+            	visible: visibility[6],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",

@@ -54,7 +54,7 @@ class App extends Component {
 
     toggleRoom(e) {
         {/* Onclick function used on rooms to toggle with their visibility. */}
-        e.preventDefault();
+        
 
         const visible = this.state.visible.slice();
         visible[e] = this.state.visible[e] ? false : true;
@@ -133,6 +133,7 @@ class App extends Component {
 
                 <div style={graphStyle}>
                     <LineGraph
+                        visible={this.state.visible}
                         dates={this.state.dates}
                         sampleNumber={this.state.sampleNumber}
                         updateDates={this.updateDates}
