@@ -58,7 +58,7 @@ class App extends Component {
 
     toggleRoom(e) {
         {/* Onclick function used on rooms to toggle with their visibility. */}
-        
+
 
         const visible = this.state.visible.slice();
         visible[e] = this.state.visible[e] ? false : true;
