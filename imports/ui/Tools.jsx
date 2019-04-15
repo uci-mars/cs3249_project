@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import TextField from '@material-ui/core/TextField';
-import Slider from '@material-ui/lab/Slider';
-import Typography from '@material-ui/core/Typography';
-import DateFnsUtils from "@date-io/date-fns";
 import { InlineDateTimePicker } from "material-ui-pickers";
+import Slider from "@material-ui/lab/Slider";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+
 const toolStyle = {
-    padding: "0px 0px 0px 30px",
+    padding: "20px",
     display: "inline-flex"
 };
 
@@ -23,12 +25,6 @@ const sliderStyles = {
 class Tools extends Component {
     constructor(props){
         super(props);
-        this.state = {
-
-
-        };
-
-
     };
 
     handleChangeInStartDate (date){
@@ -40,23 +36,25 @@ class Tools extends Component {
     };
 
     handleChange = (event, value) => {
-        this.setState({ value });
+        this.props.updateSampleNumber( value );
     };
 
     render(){
 
-        const { value } = this.state;
-
         return(
             <div style={toolStyle}>
 
-                <div className="picker">
-                    <InlineDateTimePicker
+            <Container>
+
+                <Row>
+                    <Col>
+                        <InlineDateTimePicker
+                        style={{'paddingRight': '40px'}}
                         keyboard
                         minDate={new Date("2013-10-02T05:15:00")}
                         maxDate={new Date("2013-12-03T15:30:00")}
                         ampm={true}
-                        label="With keyboard"
+                        label="Start Date"
                         value={this.props.dates[0]}
                         onChange={val => {this.handleChangeInStartDate(val)}}
                         onError={console.log}
@@ -80,13 +78,15 @@ class Tools extends Component {
                             /\d/,
                         ]}
                     />
+                    </Col>
 
-                    <InlineDateTimePicker
+                    <Col>
+                        <InlineDateTimePicker
                         keyboard
                         minDate={new Date("2013-10-02T05:15:00")}
                         maxDate={new Date("2013-12-03T15:30:00")}
                         ampm={true}
-                        label="With keyboard"
+                        label="End Date"
                         value={this.props.dates[1]}
                         onChange={val => {this.handleChangeInEndDate(val)}}
                         onError={console.log}
@@ -110,18 +110,26 @@ class Tools extends Component {
                             /\d/,
                         ]}
                     />
-                </div>
+                    </Col>
 
-                {/*<div style={sliderStyles}>*/}
-                    {/*<Typography style={typoStyle}>No. of samples</Typography>*/}
-                    {/*<Slider*/}
-                      {/*value={value}*/}
-                      {/*min={0}*/}
-                      {/*max={6}*/}
-                      {/*step={1}*/}
-                      {/*onChange={this.handleChange}*/}
-                    {/*/>*/}
-                {/*</div>   */}
+                    <Col>
+                        <p style={{"margin-top": "18px"}}>Number of Data Sample: <b>{this.props.sampleNumber}</b></p>
+                    </Col>
+
+                    <Col>
+                    <Slider
+                        max={5995}
+                        step={1}
+                        style={{"width": "350px", "margin-top": "30px"}}
+                        value={this.props.sampleNumber}
+                        aria-labelledby="label"
+                        onChange={this.handleChange}
+                    />
+                    </Col>
+                </Row>
+            </Container>
+
+
             </div>     
         );
 

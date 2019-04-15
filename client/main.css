@@ -1,7 +1,10 @@
 body {
-  padding: 10px;
-  font-family: Roboto, sans-serif;meteor
-  overflow: hidden;
+  font-family: Roboto, sans-serif;
+}
+
+.main_dashboard{
+  border-style: dotted;
+
 }
 
 /*.dashboard{*/

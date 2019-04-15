@@ -26,8 +26,7 @@ class FloorPlan extends React.Component {
         const planStyle = {
             width: "717px",
             height: "539px",
-            paddingTop: "50px",
-            paddingLeft: "40px",
+            marginTop: "140px",
             viewBox: "0 0 717 539",
             version: "1.1",
             xmlns: "http://www.w3.org/2000/svg",
@@ -47,25 +46,25 @@ class FloorPlan extends React.Component {
                     <rect id="Room-4" stroke="#979797" strokeWidth="2" x="367" y="356" width="100" height="182" fill={this.colorRender(4)} onClick={() => this.props.onClick(4)}></rect>
                     <rect id="Room-5" stroke="#979797" strokeWidth="2" x="484" y="356" width="100" height="182" fill={this.colorRender(5)} onClick={() => this.props.onClick(5)}></rect>
                     <rect id="Room-6" stroke="#979797" strokeWidth="2" x="601" y="356" width="100" height="182" fill={this.colorRender(6)} onClick={() => this.props.onClick(6)}></rect>
-                    <text id="Room-0" fontFamily="Chalkboard" fontSize="28" fontWeight="normal" fill="#000000">
+                    <text id="Room-0" fontFamily="Roboto" fontSize="28" fontWeight="normal" fill="#000000">
                         <tspan x="114.003315" y="189">Room 0</tspan>
                     </text>
-                    <text id="R1" fontFamily="Chalkboard" fontSize="28" fontWeight="normal" fill="#000000">
+                    <text id="R1" fontFamily="Roboto" fontSize="28" fontWeight="normal" fill="#000000">
                         <tspan x="52.0618785" y="518">R1</tspan>
                     </text>
-                    <text id="R2" fontFamily="Chalkboard" fontSize="28" fontWeight="normal" fill="#000000">
+                    <text id="R2" fontFamily="Roboto" fontSize="28" fontWeight="normal" fill="#000000">
                         <tspan x="172.292818" y="518">R2</tspan>
                     </text>
-                    <text id="R3" fontFamily="Chalkboard" fontSize="28" fontWeight="normal" fill="#000000">
+                    <text id="R3" fontFamily="Roboto" fontSize="28" fontWeight="normal" fill="#000000">
                         <tspan x="287.292818" y="518">R3</tspan>
                     </text>
-                    <text id="R4" fontFamily="Chalkboard" fontSize="28" fontWeight="normal" fill="#000000">
+                    <text id="R4" fontFamily="Roboto" fontSize="28" fontWeight="normal" fill="#000000">
                         <tspan x="401.292818" y="518">R4</tspan>
                     </text>
-                    <text id="R5" fontFamily="Chalkboard" fontSize="28" fontWeight="normal" fill="#000000">
+                    <text id="R5" fontFamily="Roboto" fontSize="28" fontWeight="normal" fill="#000000">
                         <tspan x="517.292818" y="518">R5</tspan>
                     </text>
-                    <text id="R6" fontFamily="Chalkboard" fontSize="28" fontWeight="normal" fill="#000000">
+                    <text id="R6" fontFamily="Roboto" fontSize="28" fontWeight="normal" fill="#000000">
                         <tspan x="634.292818" y="518">R6</tspan>
                     </text>
                     <rect id="Rectangle" stroke="#979797" strokeWidth="3" x="518.5" y="243.5" width="196" height="16"></rect>

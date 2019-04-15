@@ -34,18 +34,12 @@ class LineGraph extends Component {
         this.props.updateDates([this.props.dates[0], event.target.value]);
     };
 
-    convertDate(dateRaw) {
-        const formatDate = new Date(dateRaw);
-
-        return formatDate;
-    }
-
     downSample(dataArray) {
         const numPointsInDownsampledData: number = this.props.sampleNumber;
-        console.log(numPointsInDownsampledData);
+        // console.log(numPointsInDownsampledData);
         const data: DataPoint[] = dataArray;
         const downsampledDataLTTB: DataPoint[] = LTTB(data, numPointsInDownsampledData);
-        console.log(downsampledDataLTTB);
+        // console.log(downsampledDataLTTB);
         return downsampledDataLTTB;
     }
 
@@ -144,9 +138,7 @@ class LineGraph extends Component {
         return 0;
     }
 
-    componentDidMount(){
-        var chart = this.chart;
-
+    parseDataintoArray(){
         for (var i = 0; i < DATA.length; i++) {
             if ("0" in DATA[i].temperature) {
                 room_0.push({
@@ -212,6 +204,11 @@ class LineGraph extends Component {
         room_4.sort(this.compare);
         room_5.sort(this.compare);
         room_6.sort(this.compare);
+    }
+
+    componentDidMount(){
+        this.parseDataintoArray();
+        var chart = this.chart;
 
         room_0 = this.downSample(room_0);
         console.log(room_0);

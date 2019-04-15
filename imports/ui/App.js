@@ -14,6 +14,10 @@ import LineGraph from "./LineGraph"
 import Tools from "./Tools"
 import FloorPlan from "./FloorPlan";
 import DateFnsUtils from "@date-io/date-fns";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 
 const cold = "blue";
 const cool = "#41c4f4";
@@ -31,9 +35,8 @@ var room_6 = [];
 
 
 const graphStyle = {
-    width: "90%",
-    height: "350px",
-    padding: "30px",
+    maxWidth: "1155px",
+    height: "250px",
 };
 
 class App extends Component {
@@ -128,34 +131,40 @@ class App extends Component {
     render() {
         return (
 
-            <div>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Tools
-                        dates={this.state.dates}
-                        sampleNumber={this.state.sampleNumber}
-                        updateDates={this.updateDates}
-                        updateSampleNumber={this.updateSampleNumber}
-                    />
-                </MuiPickersUtilsProvider>
+            <div className={"main_dashboard"}>
 
-                <div style={graphStyle}>
-                    <LineGraph
-                        visible={this.state.visible}
-                        data={this.props.temperature_data}
-                        dates={this.state.dates}
-                        sampleNumber={this.state.sampleNumber}
-                        updateDates={this.updateDates}
-                        updateSampleNumber={this.updateSampleNumber}
-                    />
-                </div>
+                            <div>
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <Tools
+                                        dates={this.state.dates}
+                                        sampleNumber={this.state.sampleNumber}
+                                        updateDates={this.updateDates}
+                                        updateSampleNumber={this.updateSampleNumber}
+                                    />
+                                </MuiPickersUtilsProvider>
 
-                <div>
-                    <FloorPlan
-                        visible={this.state.visible}
-                        rooms={this.getRoomColor()}
-                        onClick={(i) => this.toggleRoom(i)}
-                    />
-                </div>
+                                <div style={graphStyle}>
+                                    <LineGraph
+                                        visible={this.state.visible}
+                                        data={this.props.temperature_data}
+                                        dates={this.state.dates}
+                                        sampleNumber={this.state.sampleNumber}
+                                        updateDates={this.updateDates}
+                                        updateSampleNumber={this.updateSampleNumber}
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <FloorPlan
+                                    visible={this.state.visible}
+                                    rooms={this.getRoomColor()}
+                                    onClick={(i) => this.toggleRoom(i)}
+                                />
+                            </div>
+
+
+
 
             </div>
         );
