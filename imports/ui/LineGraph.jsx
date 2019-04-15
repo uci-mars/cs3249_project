@@ -197,7 +197,7 @@ class LineGraph extends Component {
             };
 
             if ("6" in DATA[i].temperature) {
-                room_5.push({
+                room_6.push({
                     x: new Date(DATA[i].timestamp),
                     y: DATA[i].temperature['6'],
                     roomID: 6,
