@@ -102,14 +102,14 @@ class Tools extends Component {
                     </Col>
 
                     <Col lg={'auto'}>
-                        <p style={{ "margin-top": "18px"}}>Number of Data Sample: <b>{this.props.sampleNumber}</b></p>
+                        <p style={{ "marginTop": "18px"}}>Number of Data Sample: <b>{this.props.sampleNumber}</b></p>
                     </Col>
 
                     <Col lg={'auto'}>
                     <Slider
                         max={5995}
                         step={1}
-                        style={{"width": "280px", "margin-top": "30px"}}
+                        style={{"width": "280px", "marginTop": "30px"}}
                         value={this.props.sampleNumber}
                         aria-labelledby="label"
                         onChange={this.handleChange}

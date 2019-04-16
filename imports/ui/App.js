@@ -17,26 +17,6 @@ import {colorPicker} from "./layouts/colorPicker.js"
 import {MuiPickersUtilsProvider} from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
-const cold = "blue";
-const cool = "#41c4f4";
-const mid = "#f4df42";
-const warm = "orange";
-const hot = "red";
-
-var room_0 = [];
-var room_1 = [];
-var room_2 = [];
-var room_3 = [];
-var room_4 = [];
-var room_5 = [];
-var room_6 = [];
-
-
-const graphStyle = {
-    maxWidth: "1155px",
-    height: "250px",
-};
-
 
 
 class App extends Component {
@@ -53,9 +33,17 @@ class App extends Component {
             sampleNumber: 5995,
         };
 
+
         this.updateAverage = this.updateAverage.bind(this);
         this.updateDates = this.updateDates.bind(this);
         this.updateSampleNumber = this.updateSampleNumber.bind(this);
+    }
+
+    parseDatafromServer(){
+        var dataArray = this.props.temperature_data;
+        for (var i = 0; i < this.props.data.length; i++){
+        
+        }
     }
 
 
@@ -104,7 +92,6 @@ class App extends Component {
 
 
     render() {
-        console.log(this.props.temperature_data);
         return (
         <div className={"main_div"}>
             <div className={"main_dashboard"}>
@@ -123,7 +110,7 @@ class App extends Component {
                                 <div style={graphStyle}>
                                     <LineGraph
                                         visible={this.state.visible}
-                                        data={this.props.temperature_data}
+                                        data={this.parseDatafromServer()}
                                         dates={this.state.dates}
                                         sampleNumber={this.state.sampleNumber}
                                         updateDates={this.updateDates}
