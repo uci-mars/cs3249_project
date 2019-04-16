@@ -57,7 +57,11 @@ class LineGraph extends Component {
             },
             zoomEnabled:true,
             title: {
-                text: "Temperature Sensor in Tembusu College"
+                text: "Temperature Sensor in Tembusu College",
+                fontFamily: "Roboto",
+                fontWeight: "normal",
+                fontSize: 24,
+
             },
             toolTip:{
                 content:"RoomID: {roomID}, Timestamp: {x}, Temperature: {y}°C" ,
@@ -211,7 +215,6 @@ class LineGraph extends Component {
         var chart = this.chart;
 
         room_0 = this.downSample(room_0);
-        console.log(room_0);
         room_1 = this.downSample(room_1);
         room_2 = this.downSample(room_2);
         room_3 = this.downSample(room_3);

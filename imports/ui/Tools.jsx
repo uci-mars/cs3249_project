@@ -47,9 +47,9 @@ class Tools extends Component {
             <Container>
 
                 <Row>
-                    <Col>
+                    <Col lg={'auto'}>
                         <InlineDateTimePicker
-                        style={{'paddingRight': '40px'}}
+
                         keyboard
                         minDate={new Date("2013-10-02T05:15:00")}
                         maxDate={new Date("2013-12-03T15:30:00")}
@@ -80,7 +80,7 @@ class Tools extends Component {
                     />
                     </Col>
 
-                    <Col>
+                    <Col lg={'auto'}>
                         <InlineDateTimePicker
                         keyboard
                         minDate={new Date("2013-10-02T05:15:00")}
@@ -113,15 +113,15 @@ class Tools extends Component {
                     />
                     </Col>
 
-                    <Col>
-                        <p style={{"margin-top": "18px"}}>Number of Data Sample: <b>{this.props.sampleNumber}</b></p>
+                    <Col lg={'auto'}>
+                        <p style={{ "margin-top": "18px"}}>Number of Data Sample: <b>{this.props.sampleNumber}</b></p>
                     </Col>
 
-                    <Col>
+                    <Col lg={'auto'}>
                     <Slider
                         max={5995}
                         step={1}
-                        style={{"width": "350px", "margin-top": "30px"}}
+                        style={{"width": "280px", "margin-top": "30px"}}
                         value={this.props.sampleNumber}
                         aria-labelledby="label"
                         onChange={this.handleChange}

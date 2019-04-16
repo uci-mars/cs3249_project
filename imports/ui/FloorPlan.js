@@ -24,6 +24,7 @@ class FloorPlan extends React.Component {
 
     render() {
         const planStyle = {
+
             width: "717px",
             height: "539px",
             marginTop: "140px",

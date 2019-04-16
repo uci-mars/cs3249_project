@@ -14,10 +14,6 @@ import LineGraph from "./LineGraph"
 import Tools from "./Tools"
 import FloorPlan from "./FloorPlan";
 import DateFnsUtils from "@date-io/date-fns";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
 
 const cold = "blue";
 const cool = "#41c4f4";
@@ -38,6 +34,7 @@ const graphStyle = {
     maxWidth: "1155px",
     height: "250px",
 };
+
 
 class App extends Component {
     constructor(props){
@@ -129,8 +126,9 @@ class App extends Component {
 
 
     render() {
+        console.log(this.props.temperature_data);
         return (
-
+        <div className={"main_div"}>
             <div className={"main_dashboard"}>
 
                             <div>
@@ -155,18 +153,16 @@ class App extends Component {
                                 </div>
                             </div>
 
-                            <div>
-                                <FloorPlan
-                                    visible={this.state.visible}
-                                    rooms={this.getRoomColor()}
-                                    onClick={(i) => this.toggleRoom(i)}
-                                />
-                            </div>
-
-
-
-
             </div>
+
+            <div className={"main_floorplan"}>
+                <FloorPlan
+                    visible={this.state.visible}
+                    rooms={this.getRoomColor()}
+                    onClick={(i) => this.toggleRoom(i)}
+                />
+            </div>
+        </div>
         );
     }
 
