@@ -3,9 +3,9 @@ var Component = React.Component;
 var CanvasJSReact = require('./canvasjs/canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
 var DATA = require("./localData/data.json");
-var LTTB = require("downsample").LTTB;
+
+import {downSample, compare} from "../api/dataUtils.js"
 
 var room_0 = [];
 var room_1 = [];
@@ -15,11 +15,11 @@ var room_4 = [];
 var room_5 = [];
 var room_6 = [];
 
+
 class LineGraph extends Component {
     constructor(props){
         super(props);
 
-        this.compare.bind(this);
         this.onClickCallback.bind(this);
     }
 
@@ -34,16 +34,6 @@ class LineGraph extends Component {
     handleChangeInEndDate = name => event => {
         this.props.updateDates([this.props.dates[0], event.target.value]);
     };
-
-    downSample(dataArray) {
-        const numPointsInDownsampledData: number = this.props.sampleNumber;
-        // console.log(numPointsInDownsampledData);
-        const data: DataPoint[] = dataArray;
-        const downsampledDataLTTB: DataPoint[] = LTTB(data, numPointsInDownsampledData);
-        // console.log(downsampledDataLTTB);
-        return downsampledDataLTTB;
-    }
-
 
     render() {
         const visibility = this.props.visible.slice();
@@ -135,14 +125,6 @@ class LineGraph extends Component {
         );
     }
 
-    compare(a,b) {
-        if (a.x.getTime() < b.x.getTime())
-            return -1;
-        if (a.x.getTime() > b.x.getTime())
-            return 1;
-        return 0;
-    }
-
     parseDataintoArray(){
         for (var i = 0; i < DATA.length; i++) {
             if ("0" in DATA[i].temperature) {
@@ -202,26 +184,28 @@ class LineGraph extends Component {
             };
         };
 
-        room_0.sort(this.compare);
-        room_1.sort(this.compare);
-        room_2.sort(this.compare);
-        room_3.sort(this.compare);
-        room_4.sort(this.compare);
-        room_5.sort(this.compare);
-        room_6.sort(this.compare);
+        room_0.sort(compare);
+        room_1.sort(compare);
+        room_2.sort(compare);
+        room_3.sort(compare);
+        room_4.sort(compare);
+        room_5.sort(compare);
+        room_6.sort(compare);
     }
 
     componentDidMount(){
         this.parseDataintoArray();
-        var chart = this.chart;
 
-        room_0 = this.downSample(room_0);
-        room_1 = this.downSample(room_1);
-        room_2 = this.downSample(room_2);
-        room_3 = this.downSample(room_3);
-        room_4 = this.downSample(room_4);
-        room_5 = this.downSample(room_5);
-        room_6 = this.downSample(room_6);
+        const chart = this.chart;
+        const sampleNumber = this.props.sampleNumber
+
+        room_0 = downSample(room_0, sampleNumber);
+        room_1 = downSample(room_1, sampleNumber);
+        room_2 = downSample(room_2, sampleNumber);
+        room_3 = downSample(room_3, sampleNumber);
+        room_4 = downSample(room_4, sampleNumber);
+        room_5 = downSample(room_5, sampleNumber);
+        room_6 = downSample(room_6, sampleNumber);
 
         chart.render();
 
