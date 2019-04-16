@@ -18,7 +18,6 @@ import {MuiPickersUtilsProvider} from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
 
-
 class App extends Component {
     constructor(props){
         super(props);
@@ -42,7 +41,7 @@ class App extends Component {
     parseDatafromServer(){
         var dataArray = this.props.temperature_data;
         for (var i = 0; i < this.props.data.length; i++){
-        
+
         }
     }
 
