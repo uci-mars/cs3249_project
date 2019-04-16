@@ -5,7 +5,7 @@ University of Singapore as part the requirement of module `CS3249 User Interface
 
 ## Getting started
 
-These instructions will get you a copy of the project up and running on your local machine for development 
+Get yourself a copy of the project and follow the instructions below to run on your local machine for development 
 and testing purposes.
 
 1. Open the `Terminal`.
@@ -18,18 +18,26 @@ and testing purposes.
 ## Features
 This is a single page web application, written in `ReactJS` and deployed using `Meteor`. 
 
-**There are two major components:** 
-1. An interactive graph of historical temperature data.
-2. The floor plan of rooms where data are collected from.
+**There are three major components:** 
+1. A tool panel consists of `start & end time field` to set viewport and a `slider` for adjusting sample number used in the graph.
+2. An interactive graph of historical temperature data.
+3. The floor plan of rooms where data are collected from.
 
 
 ## Interfaces
+**Tool Panel**
+
+* `start time field` is used to set the minimum value on x-axis of graph.
+* `end time field` is used to set the maximum value on x-axis of graph.
+* `slider` is used to adjust the number of samples used in the graph.
+
+![Tool Panel](/imports/img/tools.png)
+
 
 **Interactive Graph**
 
 * The graph is implemented using `CanvasJS`.
-* It supports zoom & pan.
-* The view can be reset using reset button.
+* It supports user actions: `zoom`, `pan` and `reset`.
 
 ![Interactive Graph](/imports/img/graph.png)
 
