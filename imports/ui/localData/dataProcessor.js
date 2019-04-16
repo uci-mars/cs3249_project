@@ -1,6 +1,24 @@
 var DATA = require("./data.json");
+var LTTB = require("downsample").LTTB;
 
-import {downSample, compare} from "../../api/dataUtils.js"
+
+function downSample(dataArray, sampleNumber) {
+    const numPointsInDownsampledData: number = sampleNumber;
+    // console.log(numPointsInDownsampledData);
+    const data: DataPoint[] = dataArray;
+    const downsampledDataLTTB: DataPoint[] = LTTB(data, numPointsInDownsampledData);
+    // console.log(downsampledDataLTTB);
+    return downsampledDataLTTB;
+};
+
+
+function compare(a,b) {
+    if (a.x.getTime() < b.x.getTime())
+        return -1;
+    if (a.x.getTime() > b.x.getTime())
+        return 1;
+    return 0;
+};
 
 
 function parseDataintoArray(rooms){
