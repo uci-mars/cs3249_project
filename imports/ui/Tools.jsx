@@ -108,6 +108,7 @@ class Tools extends Component {
                     <Col lg={'auto'}>
                     <Slider
                         max={5995}
+                        min={2}
                         step={1}
                         style={{"width": "280px", "marginTop": "30px"}}
                         value={this.props.sampleNumber}

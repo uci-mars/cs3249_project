@@ -1,62 +1,63 @@
-var DATA = require("./data.json");
 
 import {downSample, compare} from "../../api/dataUtils.js"
+import { tData } from "../App.js"
 
+var rooms = [[], [], [], [], [], [], []];
 
-function parseDataintoArray(rooms){
-    for (var i = 0; i < DATA.length; i++) {
-        if ("0" in DATA[i].temperature) {
+function parseDataintoArray(){
+    for (var i = 0; i < tData.length; i++) {
+        if ("0" in tData[i].temperature) {
             rooms[0].push({
-                x: new Date(DATA[i].timestamp),
-                y: DATA[i].temperature['0'],
+                x: new Date(tData[i].timestamp),
+                y: tData[i].temperature['0'],
                 roomID: 0,
             });
         };
 
-        if ("1" in DATA[i].temperature) {
+        if ("1" in tData[i].temperature) {
             rooms[1].push({
-                x: new Date(DATA[i].timestamp),
-                y: DATA[i].temperature['1'],
+                x: new Date(tData[i].timestamp),
+                y: tData[i].temperature['1'],
                 roomID: 1,
             });
         };
 
-        if ("2" in DATA[i].temperature) {
+        if ("2" in tData[i].temperature) {
             rooms[2].push({
-                x: new Date(DATA[i].timestamp),
-                y: DATA[i].temperature['2'],
+                x: new Date(tData[i].timestamp),
+                y: tData[i].temperature['2'],
                 roomID: 2,
             });
         };
 
-        if ("3" in DATA[i].temperature) {
+        if ("3" in tData[i].temperature) {
             rooms[3].push({
-                x: new Date(DATA[i].timestamp),
-                y: DATA[i].temperature['3'],
+                x: new Date(tData[i].timestamp),
+                y: tData[i].temperature['3'],
                 roomID: 3,
             });
         };
 
-        if ("4" in DATA[i].temperature) {
+        if ("4" in tData[i].temperature) {
             rooms[4].push({
-                x: new Date(DATA[i].timestamp),
-                y: DATA[i].temperature['4'],
+                x: new Date(tData[i].timestamp),
+                y: tData[i].temperature['4'],
                 roomID: 4,
             });
         };
 
-        if ("5" in DATA[i].temperature) {
+        if ("5" in tData[i].temperature) {
             rooms[5].push({
-                x: new Date(DATA[i].timestamp),
-                y: DATA[i].temperature['5'],
+                x: new Date(tData[i].timestamp),
+                y: tData[i].temperature['5'],
                 roomID: 5,
             });
         };
 
-        if ("6" in DATA[i].temperature) {
+        if ("6" in tData[i].temperature) {
             rooms[6].push({
-                x: new Date(DATA[i].timestamp),
-                y: DATA[i].temperature['6'],
+                x: new Date(tData[i].timestamp),
+                y: tData[i].temperature['6'],
                 roomID: 6,
             });
         };
@@ -73,15 +74,18 @@ function parseDataintoArray(rooms){
 };
 
 
-function downSampleRooms(roomArray, sampleNumber) {
+function downSampleRooms(sampleNumber) {
+    var roomArray = [];
 
-    roomArray[0] = downSample(roomArray[0], sampleNumber);
-    roomArray[1] = downSample(roomArray[1], sampleNumber);
-    roomArray[2] = downSample(roomArray[2], sampleNumber);
-    roomArray[3] = downSample(roomArray[3], sampleNumber);
-    roomArray[4] = downSample(roomArray[4], sampleNumber);
-    roomArray[5] = downSample(roomArray[5], sampleNumber);
-    roomArray[6] = downSample(roomArray[6], sampleNumber);
+    roomArray[0] = downSample(rooms[0], sampleNumber);
+    roomArray[1] = downSample(rooms[1], sampleNumber);
+    roomArray[2] = downSample(rooms[2], sampleNumber);
+    roomArray[3] = downSample(rooms[3], sampleNumber);
+    roomArray[4] = downSample(rooms[4], sampleNumber);
+    roomArray[5] = downSample(rooms[5], sampleNumber);
+    roomArray[6] = downSample(rooms[6], sampleNumber);
+
+    return roomArray;
 
 }
 

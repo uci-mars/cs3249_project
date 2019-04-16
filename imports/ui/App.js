@@ -6,17 +6,21 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 import { temperature_data } from '../api/temperature_data.js';
 import { withTracker } from 'meteor/react-meteor-data';
+import LoadingScreen from 'react-loading-screen';
 
 import LineGraph from "./LineGraph"
 import Tools from "./Tools"
 import FloorPlan from "./FloorPlan";
 import {graphStyle} from "./layouts/GraphStyle.js"
-import {cold, cool, mid, warm, hot} from "./layouts/colors.js"
 import {colorPicker} from "./layouts/colorPicker.js"
+
+
+import {downSampleRooms} from "./localData/dataProcessor.js"
 
 import {MuiPickersUtilsProvider} from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
+export var tData = [];
 
 class App extends Component {
     constructor(props){
@@ -32,6 +36,7 @@ class App extends Component {
             sampleNumber: 5995,
         };
 
+        this.roomArr = [[], [], [], [], [], [], []];
 
         this.updateAverage = this.updateAverage.bind(this);
         this.updateDates = this.updateDates.bind(this);
@@ -39,10 +44,7 @@ class App extends Component {
     }
 
     parseDatafromServer(){
-        var dataArray = this.props.temperature_data;
-        for (var i = 0; i < this.props.data.length; i++){
-
-        }
+            tData = this.props.data;
     }
 
 
@@ -75,6 +77,7 @@ class App extends Component {
         this.setState({
             sampleNumber: num
         });
+        this.forceUpdate();
     }
 
     getRoomColor() {
@@ -91,53 +94,82 @@ class App extends Component {
 
 
     render() {
-        return (
-        <div className={"main_div"}>
-            <div className={"main_dashboard"}>
-                    <div>
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    <Tools
-                                        dates={this.state.dates}
-                                        sampleNumber={this.state.sampleNumber}
-                                        updateDates={this.updateDates}
-                                        updateSampleNumber={this.updateSampleNumber}
-                                    />
-                                </MuiPickersUtilsProvider>
+        this.parseDatafromServer();
+
+        if (!this.props.isLoading) {
+            this.roomArr = downSampleRooms(this.state.sampleNumber);
+
+            return (
+
+                <div className={"main_div"}>
+                    <div className={"main_dashboard"}>
+                        <div>
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <Tools
+                                    dates={this.state.dates}
+                                    sampleNumber={this.state.sampleNumber}
+                                    updateDates={this.updateDates}
+                                    updateSampleNumber={this.updateSampleNumber}
+                                />
+                            </MuiPickersUtilsProvider>
+
+                        </div>
+
+                        <div style={graphStyle}>
+                            <LineGraph
+
+
+                                visible={this.state.visible}
+                                data={this.roomArr}
+                                dates={this.state.dates}
+                                sampleNumber={this.state.sampleNumber}
+                                updateDates={this.updateDates}
+                                updateSampleNumber={this.updateSampleNumber}
+                            />
+                        </div>
+
 
                     </div>
 
-                                <div style={graphStyle}>
-                                    <LineGraph
-                                        visible={this.state.visible}
-                                        data={this.parseDatafromServer()}
-                                        dates={this.state.dates}
-                                        sampleNumber={this.state.sampleNumber}
-                                        updateDates={this.updateDates}
-                                        updateSampleNumber={this.updateSampleNumber}
-                                    />
-                                </div>
 
-
-            </div>
-
-
-            <div className={"main_floorplan"}>
-                <FloorPlan
-                    visible={this.state.visible}
-                    rooms={this.getRoomColor()}
-                    onClick={(i) => this.toggleRoom(i)}
+                    <div className={"main_floorplan"}>
+                        <FloorPlan
+                            visible={this.state.visible}
+                            rooms={this.getRoomColor()}
+                            onClick={(i) => this.toggleRoom(i)}
+                        />
+                    </div>
+                </div>
+            );
+        }
+        else{
+            return (
+                <LoadingScreen
+                    loading={true}
+                    bgColor='#f1f1f1'
+                    spinnerColor='#9ee5f8'
+                    textColor='#676767'
+                    text='Loading Temperature Data'
                 />
-            </div>
-        </div>
-        );
+            );
+
     }
+
+
+}
 
 }
 
 export default withTracker(() => {
-    Meteor.subscribe('temperature_data');
+    // https://stackoverflow.com/questions/42047761/how-to-check-for-subscription-ready-in-a-react-component
+    let isLoading = true;
+    let data = [];
 
-    return {
-        temperature_data: temperature_data.find({}).fetch(),
-    };
+    const subscription = Meteor.subscribe('temperature_data');
+    if (subscription.ready()) {
+        isLoading = false;
+        data = temperature_data.find({}).fetch();
+    }
+
+    return {data, isLoading};
 })(App);

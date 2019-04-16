@@ -4,22 +4,13 @@ var CanvasJSReact = require('./canvasjs/canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-var roomArr = [[], [], [], [], [], [], []];
 
-import {parseDataintoArray, downSampleRooms} from "./localData/dataProcessor.js"
+
+import {parseDataintoArray} from "./localData/dataProcessor.js"
 
 
 
 class LineGraph extends Component {
-    constructor(props){
-        super(props);
-
-        this.onClickCallback.bind(this);
-    }
-
-    onClickCallback(e) {
-        alert(  e.dataSeries.type + ", dataPoint { x:" + e.dataPoint.x + ", y: "+ e.dataPoint.y + " }" );
-    }
 
     handleChangeInStartDate = name => event => {
         this.props.updateDates([event.target.value, this.props.dates[1]]);
@@ -33,8 +24,6 @@ class LineGraph extends Component {
         const visibility = this.props.visible.slice();
         const changeStart = this.handleChangeInStartDate;
         const changeEnd = this.handleChangeInEndDate;
-
-        console.log(roomArr);
 
         const options = {
             theme: "light2",
@@ -67,43 +56,43 @@ class LineGraph extends Component {
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: roomArr[0]
+                dataPoints: this.props.data[0]
             }, {
             	visible: visibility[1],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: roomArr[1]
+                dataPoints: this.props.data[1]
             }, {
             	visible: visibility[2],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: roomArr[2]
+                dataPoints: this.props.data[2]
             }, {
             	visible: visibility[3],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: roomArr[3]
+                dataPoints: this.props.data[3]
             }, {
             	visible: visibility[4],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: roomArr[4]
+                dataPoints: this.props.data[4]
             }, {
             	visible: visibility[5],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: roomArr[5]
+                dataPoints: this.props.data[5]
             }, {
             	visible: visibility[6],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: roomArr[6]
+                dataPoints: this.props.data[6]
             },
             ]
         };
@@ -123,12 +112,7 @@ class LineGraph extends Component {
 
     componentDidMount(){
         const chart = this.chart;
-        const sampleNumber = this.props.sampleNumber
-
-        parseDataintoArray(roomArr);
-
-        downSampleRooms(roomArr, sampleNumber);
-
+        parseDataintoArray();
         chart.render();
 
     }
