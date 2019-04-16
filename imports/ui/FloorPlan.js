@@ -1,14 +1,12 @@
 import React from 'react';
 
-const invisible = "white";
-
-
+import {invisible} from "./layouts/colors.js"
+import {planStyle} from "./layouts/floorStyle.js"
 
 class FloorPlan extends React.Component {
 
     constructor(props) {
         super(props);
-        {/* TODO: change all initial room state to sync with average temperature. */}
     }
 
     colorRender(e) {
@@ -20,18 +18,7 @@ class FloorPlan extends React.Component {
     	}
     }
 
-   
-
     render() {
-        const planStyle = {
-            width: "717px",
-            height: "539px",
-            marginTop: "140px",
-            viewBox: "0 0 717 539",
-            version: "1.1",
-            xmlns: "http://www.w3.org/2000/svg",
-            style: "background: #FFFFFF"
-        };
 
         return (
             <svg style={planStyle}>

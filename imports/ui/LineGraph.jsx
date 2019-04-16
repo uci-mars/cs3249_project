@@ -3,6 +3,7 @@ var Component = React.Component;
 var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
 var DATA = require("./localData/data.json");
 var LTTB = require("downsample").LTTB;
 

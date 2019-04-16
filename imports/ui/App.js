@@ -1,5 +1,3 @@
-import {MuiPickersUtilsProvider} from "material-ui-pickers";
-
 var React = require('react');
 var Component = React.Component;
 var CanvasJSReact = require('./canvasjs.react');
@@ -9,21 +7,19 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 import { temperature_data } from '../api/temperature_data.js';
 import { withTracker } from 'meteor/react-meteor-data';
 
-
 import LineGraph from "./LineGraph"
 import Tools from "./Tools"
 import FloorPlan from "./FloorPlan";
+import {graphStyle} from "./layouts/GraphStyle.js"
+import {cold, cool, mid, warm, hot} from "./layouts/colors.js"
+import {colorPicker} from "./layouts/colorPicker.js"
+
 import DateFnsUtils from "@date-io/date-fns";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-
-const cold = "blue";
-const cool = "#41c4f4";
-const mid = "#f4df42";
-const warm = "orange";
-const hot = "red";
+import {MuiPickersUtilsProvider} from "material-ui-pickers";
 
 var room_0 = [];
 var room_1 = [];
@@ -33,11 +29,6 @@ var room_4 = [];
 var room_5 = [];
 var room_6 = [];
 
-
-const graphStyle = {
-    maxWidth: "1155px",
-    height: "250px",
-};
 
 class App extends Component {
     constructor(props){
@@ -61,8 +52,6 @@ class App extends Component {
 
     toggleRoom(e) {
         {/* Onclick function used on rooms to toggle with their visibility. */}
-
-
         const visible = this.state.visible.slice();
         visible[e] = this.state.visible[e] ? false : true;
         this.setState({
@@ -73,7 +62,6 @@ class App extends Component {
     updateAverage(temps) {
         {/* INPUT: an array of temperatures of each room */}
         {/* TODO: initialise avgs state by each room data */}
-
         this.setState({
             avgs: temps
         });
@@ -81,7 +69,6 @@ class App extends Component {
 
     updateDates(newDates) {
         {/* INPUT: an array of two elements. newDates[0] is start date; newDates[1] is end date */}
-
         this.setState({
             dates: newDates
         });
@@ -89,30 +76,9 @@ class App extends Component {
 
     updateSampleNumber(num) {
         {/* INPUT: an number that represents sample number */}
-
         this.setState({
             sampleNumber: num
         });
-    }
-
-
-    colorPicker(temp) {
-        {/* Section the temperature to different color range. */}
-        if (temp <= 10) {
-            return cold;
-
-        } else if (temp <= 18) {
-            return cool;
-
-        } else if (temp <= 22) {
-            return mid;
-
-        } else if (temp <= 26) {
-            return warm;
-
-        } else {
-            return hot;
-        }
     }
 
     getRoomColor() {
@@ -121,7 +87,7 @@ class App extends Component {
         const avgs = this.state.avgs.slice();
 
         for (var i = 0; i < avgs.length; i++) {
-            values[i] = this.colorPicker(avgs[i]);
+            values[i] = colorPicker(avgs[i]);
         }
 
         return values;
