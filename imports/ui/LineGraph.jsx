@@ -1,6 +1,6 @@
 var React = require('react');
 var Component = React.Component;
-var CanvasJSReact = require('./canvasjs.react');
+var CanvasJSReact = require('./canvasjs/canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 

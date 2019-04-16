@@ -1,6 +1,6 @@
 var React = require('react');
 var Component = React.Component;
-var CanvasJSReact = require('./canvasjs.react');
+var CanvasJSReact = require('./canvasjs/canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -20,15 +20,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import {MuiPickersUtilsProvider} from "material-ui-pickers";
-
-var room_0 = [];
-var room_1 = [];
-var room_2 = [];
-var room_3 = [];
-var room_4 = [];
-var room_5 = [];
-var room_6 = [];
-
 
 class App extends Component {
     constructor(props){
@@ -99,38 +90,35 @@ class App extends Component {
 
             <div className={"main_dashboard"}>
 
-                            <div>
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    <Tools
-                                        dates={this.state.dates}
-                                        sampleNumber={this.state.sampleNumber}
-                                        updateDates={this.updateDates}
-                                        updateSampleNumber={this.updateSampleNumber}
-                                    />
-                                </MuiPickersUtilsProvider>
+                <div>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <Tools
+                            dates={this.state.dates}
+                            sampleNumber={this.state.sampleNumber}
+                            updateDates={this.updateDates}
+                            updateSampleNumber={this.updateSampleNumber}
+                        />
+                    </MuiPickersUtilsProvider>
 
-                                <div style={graphStyle}>
-                                    <LineGraph
-                                        visible={this.state.visible}
-                                        data={this.props.temperature_data}
-                                        dates={this.state.dates}
-                                        sampleNumber={this.state.sampleNumber}
-                                        updateDates={this.updateDates}
-                                        updateSampleNumber={this.updateSampleNumber}
-                                    />
-                                </div>
-                            </div>
+                    <div style={graphStyle}>
+                        <LineGraph
+                            visible={this.state.visible}
+                            data={this.props.temperature_data}
+                            dates={this.state.dates}
+                            sampleNumber={this.state.sampleNumber}
+                            updateDates={this.updateDates}
+                            updateSampleNumber={this.updateSampleNumber}
+                        />
+                    </div>
+                </div>
 
-                            <div>
-                                <FloorPlan
-                                    visible={this.state.visible}
-                                    rooms={this.getRoomColor()}
-                                    onClick={(i) => this.toggleRoom(i)}
-                                />
-                            </div>
-
-
-
+                <div>
+                    <FloorPlan
+                        visible={this.state.visible}
+                        rooms={this.getRoomColor()}
+                        onClick={(i) => this.toggleRoom(i)}
+                    />
+                </div>
 
             </div>
         );
