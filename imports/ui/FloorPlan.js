@@ -1,14 +1,12 @@
 import React from 'react';
 
-const invisible = "white";
-
-
+import {invisible} from "./layouts/colors.js"
+import {planStyle} from "./layouts/floorStyle.js"
 
 class FloorPlan extends React.Component {
 
     constructor(props) {
         super(props);
-        {/* TODO: change all initial room state to sync with average temperature. */}
     }
 
     colorRender(e) {
@@ -19,8 +17,6 @@ class FloorPlan extends React.Component {
     		return this.props.rooms[e];
     	}
     }
-
-   
 
     render() {
         const planStyle = {

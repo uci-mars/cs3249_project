@@ -1,25 +1,13 @@
 import React, {Component} from 'react';
+
+import {toolStyle, typoStyle, sliderStyles} from "./layouts/ToolStyle.js"
+
 import { InlineDateTimePicker } from "material-ui-pickers";
 import Slider from "@material-ui/lab/Slider";
+
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
-
-const toolStyle = {
-    padding: "20px",
-    display: "inline-flex"
-};
-
-const typoStyle = {
-    padding: "10px"
-};
-
-const sliderStyles = {
-    width: 300,
-    padding: "15px 0px 0px 270px",
-    align: "right"
-};
 
 
 class Tools extends Component {
