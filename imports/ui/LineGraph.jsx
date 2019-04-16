@@ -3,17 +3,11 @@ var Component = React.Component;
 var CanvasJSReact = require('./canvasjs/canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-var DATA = require("./localData/data.json");
 
-import {downSample, compare} from "../api/dataUtils.js"
+var roomArr = [[], [], [], [], [], [], []];
 
-var room_0 = [];
-var room_1 = [];
-var room_2 = [];
-var room_3 = [];
-var room_4 = [];
-var room_5 = [];
-var room_6 = [];
+import {parseDataintoArray, downSampleRooms} from "./localData/dataProcessor.js"
+
 
 
 class LineGraph extends Component {
@@ -39,6 +33,8 @@ class LineGraph extends Component {
         const visibility = this.props.visible.slice();
         const changeStart = this.handleChangeInStartDate;
         const changeEnd = this.handleChangeInEndDate;
+
+        console.log(roomArr);
 
         const options = {
             theme: "light2",
@@ -71,43 +67,43 @@ class LineGraph extends Component {
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: room_0
+                dataPoints: roomArr[0]
             }, {
             	visible: visibility[1],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: room_1
+                dataPoints: roomArr[1]
             }, {
             	visible: visibility[2],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: room_2
+                dataPoints: roomArr[2]
             }, {
             	visible: visibility[3],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: room_3
+                dataPoints: roomArr[3]
             }, {
             	visible: visibility[4],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: room_4
+                dataPoints: roomArr[4]
             }, {
             	visible: visibility[5],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: room_5
+                dataPoints: roomArr[5]
             }, {
             	visible: visibility[6],
                 type: "line",
                 xValueFormatString: "DD/MM/YY hh:mm tt",
                 yValueFormatString: "##.#####",
-                dataPoints: room_6
+                dataPoints: roomArr[6]
             },
             ]
         };
@@ -125,87 +121,13 @@ class LineGraph extends Component {
         );
     }
 
-    parseDataintoArray(){
-        for (var i = 0; i < DATA.length; i++) {
-            if ("0" in DATA[i].temperature) {
-                room_0.push({
-                    x: new Date(DATA[i].timestamp),
-                    y: DATA[i].temperature['0'],
-                    roomID: 0,
-                });
-            };
-
-            if ("1" in DATA[i].temperature) {
-                room_1.push({
-                    x: new Date(DATA[i].timestamp),
-                    y: DATA[i].temperature['1'],
-                    roomID: 1,
-                });
-            };
-
-            if ("2" in DATA[i].temperature) {
-                room_2.push({
-                    x: new Date(DATA[i].timestamp),
-                    y: DATA[i].temperature['2'],
-                    roomID: 2,
-                });
-            };
-
-            if ("3" in DATA[i].temperature) {
-                room_3.push({
-                    x: new Date(DATA[i].timestamp),
-                    y: DATA[i].temperature['3'],
-                    roomID: 3,
-                });
-            };
-
-            if ("4" in DATA[i].temperature) {
-                room_4.push({
-                    x: new Date(DATA[i].timestamp),
-                    y: DATA[i].temperature['4'],
-                    roomID: 4,
-                });
-            };
-
-            if ("5" in DATA[i].temperature) {
-                room_5.push({
-                    x: new Date(DATA[i].timestamp),
-                    y: DATA[i].temperature['5'],
-                    roomID: 5,
-                });
-            };
-
-            if ("6" in DATA[i].temperature) {
-                room_6.push({
-                    x: new Date(DATA[i].timestamp),
-                    y: DATA[i].temperature['6'],
-                    roomID: 6,
-                });
-            };
-        };
-
-        room_0.sort(compare);
-        room_1.sort(compare);
-        room_2.sort(compare);
-        room_3.sort(compare);
-        room_4.sort(compare);
-        room_5.sort(compare);
-        room_6.sort(compare);
-    }
-
     componentDidMount(){
-        this.parseDataintoArray();
-
         const chart = this.chart;
         const sampleNumber = this.props.sampleNumber
 
-        room_0 = downSample(room_0, sampleNumber);
-        room_1 = downSample(room_1, sampleNumber);
-        room_2 = downSample(room_2, sampleNumber);
-        room_3 = downSample(room_3, sampleNumber);
-        room_4 = downSample(room_4, sampleNumber);
-        room_5 = downSample(room_5, sampleNumber);
-        room_6 = downSample(room_6, sampleNumber);
+        parseDataintoArray(roomArr);
+
+        downSampleRooms(roomArr, sampleNumber);
 
         chart.render();
 
