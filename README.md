@@ -14,7 +14,7 @@ and testing purposes.
 3. Type the command `meteor npm install --save` to install dependencies.
 4. Once done, type the command `meteor` in the terminal to start the app.<br/><br/>
 `If this is your first time running the app, be sure to follow the instruction below on how to load the database before continuing.`<br/><br/>
-`Problem with Meteor-MongoDB? Run `meteor reset` and then try to run the app again!`<br/><br/>
+`Problem with Meteor-MongoDB? Run 'meteor reset' and then try to run the app again!`<br/><br/>
 
 5. After project is set up and running, open your browser and go to `http://localhost:3000`.
 6. The interface of the application should be displayed on the page.
