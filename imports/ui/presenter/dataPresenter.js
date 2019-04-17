@@ -1,6 +1,7 @@
 import { rawData } from "../App.js";
 var LTTB = require("downsample").LTTB;
 
+// https://www.npmjs.com/package/downsample
 function downSample(dataArray, sampleNumber) {
     const numPointsInDownsampledData: number = sampleNumber;
     const data: DataPoint[] = dataArray;
