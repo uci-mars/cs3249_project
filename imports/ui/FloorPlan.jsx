@@ -1,7 +1,5 @@
 import React from 'react';
 
-import {invisible} from "./layouts/colors.js"
-import {planStyle} from "./layouts/floorStyle.js"
 
 class FloorPlan extends React.Component {
 
@@ -12,7 +10,7 @@ class FloorPlan extends React.Component {
     colorRender(e) {
     	{/* Used for passing argument to 'fill' property of room SVG component. */}
     	if (this.props.visible[e] === false) {
-    		return invisible;
+    		return "#FFFFFF";
     	} else {
     		return this.props.rooms[e];
     	}

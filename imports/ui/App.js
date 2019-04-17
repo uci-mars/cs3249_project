@@ -12,8 +12,6 @@ import LineGraph from "./LineGraph"
 import Tools from "./Tools"
 import FloorPlan from "./FloorPlan";
 import {graphStyle} from "./layouts/GraphStyle.js"
-import {colorPicker} from "./layouts/colorPicker.js"
-
 
 import {mainPresenter, parseDataintoArray, calculateAvgTemperature} from "./presenter/dataPresenter.js"
 
@@ -178,6 +176,7 @@ export default withTracker(() => {
     if (subscription.ready()) {
         isLoading = false;
         rawData = temperature_data.find({"timestamp" : queryDate},{ sort: { "timestamp": 1 }}).fetch();
+        console.log(rawData);
     }
 
     return {data, isLoading};
