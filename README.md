@@ -8,21 +8,21 @@ University of Singapore as part the requirement of module `CS3249 User Interface
 Get yourself a copy of the project and follow the instructions below to run on your local machine for development 
 and testing purposes.
 
+#### To run the app:
+1. Open the `Terminal`.
+2. `cd` to the project folder `cs3249_project`.
+3. Type the command `meteor` in the terminal.<br/><br/>
+`If this is your first time running the app, be sure to follow the instruction below on how to load the database before continuing.`<br/><br/>
+4. After project is set up and running, open your browser and go to `http://localhost:3000`.
+5. The interface of the application should be displayed on the page.
+
 #### Loading the data into MongoDB (First-time use only):
-1. Open the Meteor-MongoDB console using one of the methods below:
+1. Open the Meteor-MongoDB console using one of the methods below (make sure that the app is running):
 * `WINDOWS_meteor_mongo.bat` for Windows 
 * `MACOSX_meteor_mongo.sh` for Mac
 * Open another terminal and type the command `meteor mongo`.
 2. Type the command `load('server/script.js')` into Meteor-MongoDB console.
 3. Close the console.
-
-
-#### To run the app:
-1. Open the `Terminal`.
-2. `cd` to the project folder `cs3249_project`.
-3. Type the command `meteor` in the terminal.
-4. After project is set up and running, open your browser and go to `http://localhost:3000`.
-5. The interface of the application should be displayed on the page.
 
 
 ## Features
