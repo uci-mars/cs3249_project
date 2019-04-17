@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {toolStyle, typoStyle, sliderStyles} from "./layouts/ToolStyle.js"
+import {toolStyle, typoStyle, sliderStyles} from "../layouts/ToolStyle.js"
 
 import { InlineDateTimePicker } from "material-ui-pickers";
 import Slider from "@material-ui/lab/Slider";

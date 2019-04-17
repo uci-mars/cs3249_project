@@ -8,9 +8,9 @@ import { temperature_data } from '../api/temperature_data.js';
 import { withTracker } from 'meteor/react-meteor-data';
 import LoadingScreen from 'react-loading-screen';
 
-import LineGraph from "./LineGraph"
-import Tools from "./Tools"
-import FloorPlan from "./FloorPlan";
+import LineGraph from "./view/LineGraph"
+import Tools from "./view/Tools"
+import FloorPlan from "./view/FloorPlan";
 import {graphStyle} from "./layouts/GraphStyle.js"
 
 import {mainPresenter, parseDataintoArray, calculateAvgTemperature} from "./presenter/dataPresenter.js"
