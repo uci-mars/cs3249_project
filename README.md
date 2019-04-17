@@ -8,6 +8,13 @@ University of Singapore as part the requirement of module `CS3249 User Interface
 Get yourself a copy of the project and follow the instructions below to run on your local machine for development 
 and testing purposes.
 
+#### Loading the data into MongoDB (First-time use only):
+1. Open the Meteor-MongoDB console using `WINDOWS_meteor_mongo.bat` for Windows or `MACOSX_meteor_mongo.sh` for Mac.
+2. Type the command `load('server/script.js')` into Meteor-MongoDB console.
+3. Close the console.
+
+
+#### To run the app:
 1. Open the `Terminal`.
 2. `cd` to the project folder `cs3249_project`.
 3. Type the command `meteor` in the terminal.
@@ -52,7 +59,7 @@ from data points currently displayed on interactive graph.
 ![Floor Plan](/imports/img/floor_plan.png)
 
 
-## Authors
+## Developers
 
 * Zhuang Xinjie 
 * Marawin Chheang
