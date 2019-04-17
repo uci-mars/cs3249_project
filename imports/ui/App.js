@@ -147,7 +147,7 @@ class App extends Component {
         }
         else{
             return (
-                <LoadingScreen
+                <LoadingScreen  
                     loading={true}
                     bgColor='#f1f1f1'
                     spinnerColor='#9ee5f8'
@@ -166,8 +166,6 @@ class App extends Component {
 export default withTracker(() => {
     // https://stackoverflow.com/questions/42047761/how-to-check-for-subscription-ready-in-a-react-component
     let isLoading = true;
-    let data = [];
-
     Session.get('startDate');
     Session.get('endDate');
 
@@ -179,5 +177,5 @@ export default withTracker(() => {
         console.log(rawData);
     }
 
-    return {data, isLoading};
+    return {isLoading};
 })(App);

@@ -9,3 +9,7 @@ if (Meteor.isServer) {
         return temperature_data.find();
     });
 }
+
+
+
+
