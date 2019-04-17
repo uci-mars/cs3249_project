@@ -11,10 +11,11 @@ and testing purposes.
 #### To run the app:
 1. Open the `Terminal`.
 2. `cd` to the project folder `cs3249_project`.
-3. Type the command `meteor` in the terminal.<br/><br/>
+3. Type the command `meteor npm install --save` to install dependencies.
+4. Once done, type the command `meteor` in the terminal to start the app.<br/><br/>
 `If this is your first time running the app, be sure to follow the instruction below on how to load the database before continuing.`<br/><br/>
-4. After project is set up and running, open your browser and go to `http://localhost:3000`.
-5. The interface of the application should be displayed on the page.
+5. After project is set up and running, open your browser and go to `http://localhost:3000`.
+6. The interface of the application should be displayed on the page.
 
 #### Loading the data into MongoDB (First-time use only):
 1. Open the Meteor-MongoDB console using one of the methods below (make sure that the app is running):
