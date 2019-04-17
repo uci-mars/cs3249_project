@@ -90,7 +90,7 @@ class App extends Component {
         const avgs = this.state.avgs.slice();
 
         for (var i = 0; i < avgs.length; i++) {
-            values[i] = "hsla(240, 100%, 50%,"+ (Math.floor((avgs[i] * 16)/45) / 10) + ")";
+            values[i] = "hsla("+ (273-Math.floor(avgs[i]*8/3)) + ", 100%, 50%,"+ (1 - Math.floor(avgs[i] * 16)/850) + ")";
         }
         // console.log(values);
         return values;
