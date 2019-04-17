@@ -9,7 +9,10 @@ Get yourself a copy of the project and follow the instructions below to run on y
 and testing purposes.
 
 #### Loading the data into MongoDB (First-time use only):
-1. Open the Meteor-MongoDB console using `WINDOWS_meteor_mongo.bat` for Windows or `MACOSX_meteor_mongo.sh` for Mac.
+1. Open the Meteor-MongoDB console using one of the methods below:
+* `WINDOWS_meteor_mongo.bat` for Windows 
+* `MACOSX_meteor_mongo.sh` for Mac
+* Open another terminal and type the command `meteor mongo`.
 2. Type the command `load('server/script.js')` into Meteor-MongoDB console.
 3. Close the console.
 
