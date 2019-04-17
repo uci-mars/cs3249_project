@@ -5,6 +5,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 import { temperature_data } from '../api/temperature_data.js';
+import { room_0, room_1, room_2, room_3, room_4, room_5, room_6 } from '../api/room_0.js';
 import { withTracker } from 'meteor/react-meteor-data';
 import LoadingScreen from 'react-loading-screen';
 
@@ -20,7 +21,8 @@ import {downSampleRooms} from "./localData/dataProcessor.js"
 import {MuiPickersUtilsProvider} from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
-export var tData = [];
+
+var queryDate = {$gte: new Date("2013-10-02T05:15:00"), $lt: new Date("2013-12-03T15:30:00")};
 
 class App extends Component {
     constructor(props){
@@ -42,11 +44,6 @@ class App extends Component {
         this.updateDates = this.updateDates.bind(this);
         this.updateSampleNumber = this.updateSampleNumber.bind(this);
     }
-
-    parseDatafromServer(){
-            tData = this.props.data;
-    }
-
 
     toggleRoom(e) {
         {/* Onclick function used on rooms to toggle with their visibility. */}
@@ -70,6 +67,8 @@ class App extends Component {
         this.setState({
             dates: newDates
         });
+
+        queryDate = {$gte: this.state.dates[0], $lt: this.state.dates[1]};
     }
 
     updateSampleNumber(num) {
@@ -94,10 +93,16 @@ class App extends Component {
 
 
     render() {
-        this.parseDatafromServer();
+
 
         if (!this.props.isLoading) {
-            this.roomArr = downSampleRooms(this.state.sampleNumber);
+             downSampleRooms(this.roomArr,
+                            this.props.parsedData,
+                            this.state.sampleNumber,
+                            5995,
+                            this.state.dates[0],
+                            this.state.dates[1],
+                            this.state.visible);
 
             return (
 
@@ -120,7 +125,7 @@ class App extends Component {
 
 
                                 visible={this.state.visible}
-                                data={this.roomArr}
+                                data={this.props.parsedData}
                                 dates={this.state.dates}
                                 sampleNumber={this.state.sampleNumber}
                                 updateDates={this.updateDates}
@@ -163,13 +168,31 @@ class App extends Component {
 export default withTracker(() => {
     // https://stackoverflow.com/questions/42047761/how-to-check-for-subscription-ready-in-a-react-component
     let isLoading = true;
-    let data = [];
+    let data_0 = [];
 
-    const subscription = Meteor.subscribe('temperature_data');
-    if (subscription.ready()) {
+    var parsedData = [[], [], [], [], [], [], []];
+
+    const subscription_0 = Meteor.subscribe('room_0');
+    const subscription_1 = Meteor.subscribe('room_1');
+    const subscription_2 = Meteor.subscribe('room_2');
+    const subscription_3 = Meteor.subscribe('room_3');
+    const subscription_4 = Meteor.subscribe('room_4');
+    const subscription_5 = Meteor.subscribe('room_5');
+    const subscription_6 = Meteor.subscribe('room_6');
+
+    if (subscription_0.ready() && subscription_1.ready() && subscription_2.ready() && subscription_3.ready() && subscription_4.ready() && subscription_5.ready() && subscription_6.ready()) {
         isLoading = false;
-        data = temperature_data.find({}).fetch();
+        parsedData[0] = room_0.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
+        parsedData[1] = room_1.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
+        parsedData[2] = room_2.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
+        parsedData[3] = room_3.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
+        parsedData[4] = room_4.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
+        parsedData[5] = room_5.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
+        parsedData[6] = room_6.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
+        console.log(parsedData);
+
+
     }
 
-    return {data, isLoading};
+    return {parsedData, isLoading};
 })(App);

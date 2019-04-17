@@ -4,7 +4,6 @@ import {toolStyle, typoStyle, sliderStyles} from "./layouts/ToolStyle.js"
 
 import { InlineDateTimePicker } from "material-ui-pickers";
 import Slider from "@material-ui/lab/Slider";
-
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -27,8 +26,7 @@ class Tools extends Component {
         this.props.updateSampleNumber( value );
     };
 
-    render(){
-
+    render() {
         return(
             <div style={toolStyle}>
 
@@ -102,7 +100,9 @@ class Tools extends Component {
                     </Col>
 
                     <Col lg={'auto'}>
-                        <p style={{ "marginTop": "18px"}}>Number of Data Sample: <b>{this.props.sampleNumber}</b></p>
+                        <div style={{'width': '240px'}}>
+                            <p style={{ "marginTop": "18px"}}>Number of Data Sample: <b>{this.props.sampleNumber}</b></p>
+                        </div>
                     </Col>
 
                     <Col lg={'auto'}>
@@ -110,7 +110,7 @@ class Tools extends Component {
                         max={5995}
                         min={2}
                         step={1}
-                        style={{"width": "280px", "marginTop": "30px"}}
+                        style={{"width": "260px", "marginTop": "30px"}}
                         value={this.props.sampleNumber}
                         aria-labelledby="label"
                         onChange={this.handleChange}

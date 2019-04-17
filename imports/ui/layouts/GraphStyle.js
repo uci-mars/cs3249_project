@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 const graphStyle = {
-    maxWidth: "1155px",
+    width: "1300px",
     height: "250px",
 };
 

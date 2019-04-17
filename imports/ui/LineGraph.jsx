@@ -8,49 +8,67 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 import {parseDataintoArray} from "./localData/dataProcessor.js"
 
-
-
 class LineGraph extends Component {
+    constructor(props){
+        super(props);
 
-    handleChangeInStartDate = name => event => {
-        this.props.updateDates([event.target.value, this.props.dates[1]]);
+        this.state = {
+            startDate: new Date(),
+        };
+
+        this.handleChangeInStartDate = this.handleChangeInStartDate.bind(this);
+    }
+
+    handleChangeInStartDate(date){
+        this.props.updateDates([date, this.props.dates[1]]);
     };
 
-    handleChangeInEndDate = name => event => {
-        this.props.updateDates([this.props.dates[0], event.target.value]);
+    handleChangeInEndDate(date){
+        this.props.updateDates([this.props.dates[0], date]);
     };
 
     render() {
+        var that = this; //https://stackoverflow.com/a/9644107
         const visibility = this.props.visible.slice();
-        const changeStart = this.handleChangeInStartDate;
-        const changeEnd = this.handleChangeInEndDate;
 
         const options = {
             theme: "light2",
+
             rangeChanged: function (e) {
-                changeStart(new Date(e.axisX[0].viewportMinimum));
-                changeEnd(new Date(e.axisX[0].viewportMaximum));
+                if(e.trigger === "reset") {
+                    that.handleChangeInStartDate(new Date("2013-10-02T05:15:00"));
+                    that.handleChangeInEndDate(new Date("2013-12-03T15:30:00"));
+                } else {
+                    that.handleChangeInStartDate(new Date(e.axisX[0].viewportMinimum));
+                    that.handleChangeInEndDate(new Date(e.axisX[0].viewportMaximum));
+                }
             },
+
             zoomEnabled:true,
+
             title: {
                 text: "Temperature Sensor in Tembusu College",
                 fontFamily: "Roboto",
                 fontWeight: "normal",
                 fontSize: 24,
-
             },
+
             toolTip:{
                 content:"RoomID: {roomID}, Timestamp: {x}, Temperature: {y}°C" ,
             },
+
             axisX: {
                 viewportMinimum: this.props.dates[0],
                 viewportMaximum: this.props.dates[1],
+
             },
+
             axisY: {
                 title: "Temperature",
                 suffix: "°C",
                 includeZero: false
             },
+
             data: [{
             	visible: visibility[0],
                 type: "line",
@@ -112,7 +130,6 @@ class LineGraph extends Component {
 
     componentDidMount(){
         const chart = this.chart;
-        parseDataintoArray();
         chart.render();
 
     }

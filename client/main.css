@@ -1,20 +1,20 @@
 body {
   font-family: Roboto, sans-serif;
-  text-align: center;
 
 }
 .main_div{
-  /*border-style: dotted;*/
+  text-align: center;
+  background-color: #FFFFFF;
 
 }
 .main_dashboard{
-  /*border-style: dotted;*/
   display: inline-block;
 
 }
 
 .main_floorplan{
   display: inline-block;
+  margin: 50px;
 
 }
 
