@@ -1,12 +1,12 @@
 var React = require('react');
 var Component = React.Component;
-var CanvasJSReact = require('./canvasjs/canvasjs.react');
+var CanvasJSReact = require('../canvasjs/canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
 
-import {parseDataintoArray} from "./presenter/dataPresenter.js"
+import {parseDataintoArray} from "../presenter/dataPresenter.js"
 
 class LineGraph extends Component {
     constructor(props){
