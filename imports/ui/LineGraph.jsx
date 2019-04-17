@@ -6,7 +6,7 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
 
-import {parseDataintoArray} from "./localData/dataProcessor.js"
+import {parseDataintoArray} from "./presenter/dataPresenter.js"
 
 class LineGraph extends Component {
     constructor(props){

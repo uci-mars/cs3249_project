@@ -5,7 +5,6 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 import { temperature_data } from '../api/temperature_data.js';
-import { room_0, room_1, room_2, room_3, room_4, room_5, room_6 } from '../api/room_0.js';
 import { withTracker } from 'meteor/react-meteor-data';
 import LoadingScreen from 'react-loading-screen';
 
@@ -16,13 +15,15 @@ import {graphStyle} from "./layouts/GraphStyle.js"
 import {colorPicker} from "./layouts/colorPicker.js"
 
 
-import {downSampleRooms} from "./localData/dataProcessor.js"
+import {mainPresenter, parseDataintoArray, calculateAvgTemperature} from "./presenter/dataPresenter.js"
 
 import {MuiPickersUtilsProvider} from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
 
-var queryDate = {$gte: new Date("2013-10-02T05:15:00"), $lt: new Date("2013-12-03T15:30:00")};
+var queryDate = {};
+
+export var rawData = [];
 
 class App extends Component {
     constructor(props){
@@ -33,12 +34,15 @@ class App extends Component {
         {/* default sample number is the total number of data points provided */}
         this.state = {
             visible: [true, true, true, true, true, true, true],
-            avgs: [5, 10, 15, 20, 25, 30, 22],
+            avgs: [0, 0, 0, 0, 0, 0, 0],
             dates: [new Date("2013-10-02T05:15:00"), new Date("2013-12-03T15:30:00")],
             sampleNumber: 5995,
         };
 
-        this.roomArr = [[], [], [], [], [], [], []];
+        this.presenterData = [[], [], [], [], [], [], []];
+
+        Session.set('startDate', new Date("2013-10-02T05:15:00"));
+        Session.set('endDate', new Date("2013-12-03T15:30:00"));
 
         this.updateAverage = this.updateAverage.bind(this);
         this.updateDates = this.updateDates.bind(this);
@@ -54,7 +58,7 @@ class App extends Component {
         });
     }
 
-    updateAverage(temps) {
+    updateAverage() {
         {/* INPUT: an array of temperatures of each room */}
         {/* TODO: initialise avgs state by each room data */}
         this.setState({
@@ -67,6 +71,9 @@ class App extends Component {
         this.setState({
             dates: newDates
         });
+
+        Session.set('startDate', this.state.dates[0]);
+        Session.set('endDate', this.state.dates[1]);
 
         queryDate = {$gte: this.state.dates[0], $lt: this.state.dates[1]};
     }
@@ -85,24 +92,17 @@ class App extends Component {
         const avgs = this.state.avgs.slice();
 
         for (var i = 0; i < avgs.length; i++) {
-            values[i] = colorPicker(avgs[i]);
+            values[i] = "hsla(240,100%," + Math.floor(100 - (avgs[i] * 2)) + "%)";
         }
-
+        console.log(values);
         return values;
     }
 
 
     render() {
-
-
         if (!this.props.isLoading) {
-             downSampleRooms(this.roomArr,
-                            this.props.parsedData,
-                            this.state.sampleNumber,
-                            5995,
-                            this.state.dates[0],
-                            this.state.dates[1],
-                            this.state.visible);
+            this.presenterData = mainPresenter(parseDataintoArray(), this.state.sampleNumber);
+            this.state.avgs = calculateAvgTemperature(this.presenterData);
 
             return (
 
@@ -125,7 +125,7 @@ class App extends Component {
 
 
                                 visible={this.state.visible}
-                                data={this.props.parsedData}
+                                data={this.presenterData}
                                 dates={this.state.dates}
                                 sampleNumber={this.state.sampleNumber}
                                 updateDates={this.updateDates}
@@ -168,31 +168,17 @@ class App extends Component {
 export default withTracker(() => {
     // https://stackoverflow.com/questions/42047761/how-to-check-for-subscription-ready-in-a-react-component
     let isLoading = true;
-    let data_0 = [];
+    let data = [];
 
-    var parsedData = [[], [], [], [], [], [], []];
+    Session.get('startDate');
+    Session.get('endDate');
 
-    const subscription_0 = Meteor.subscribe('room_0');
-    const subscription_1 = Meteor.subscribe('room_1');
-    const subscription_2 = Meteor.subscribe('room_2');
-    const subscription_3 = Meteor.subscribe('room_3');
-    const subscription_4 = Meteor.subscribe('room_4');
-    const subscription_5 = Meteor.subscribe('room_5');
-    const subscription_6 = Meteor.subscribe('room_6');
+    const subscription = Meteor.subscribe('temperature_data');
 
-    if (subscription_0.ready() && subscription_1.ready() && subscription_2.ready() && subscription_3.ready() && subscription_4.ready() && subscription_5.ready() && subscription_6.ready()) {
+    if (subscription.ready()) {
         isLoading = false;
-        parsedData[0] = room_0.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
-        parsedData[1] = room_1.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
-        parsedData[2] = room_2.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
-        parsedData[3] = room_3.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
-        parsedData[4] = room_4.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
-        parsedData[5] = room_5.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
-        parsedData[6] = room_6.find({"x" : queryDate},{ sort: { "x": 1 }}).fetch();
-        console.log(parsedData);
-
-
+        rawData = temperature_data.find({"timestamp" : queryDate},{ sort: { "timestamp": 1 }}).fetch();
     }
 
-    return {parsedData, isLoading};
+    return {data, isLoading};
 })(App);
