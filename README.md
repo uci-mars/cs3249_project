@@ -3,6 +3,8 @@
 This project is done by two students at National 
 University of Singapore as part the requirement of module `CS3249 User Interface Development`.
 
+Presentation Sildes: https://docs.google.com/presentation/d/1ja8LfKcjXpOIG2-0BUnrUiycUEPg7XZmzNMtrTGJ1fo/edit?usp=sharing
+
 ## Getting started
 
 Get yourself a copy of the project and follow the instructions below to run on your local machine for development 
